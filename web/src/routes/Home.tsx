@@ -1,7 +1,7 @@
 import { Text, Title } from '@mantine/core';
 import Particles from '../components/ui/animations/particles/Particles';
 
-const Home = () => {
+export default () => {
 	return (
 		<>
 			<div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
@@ -14,7 +14,7 @@ const Home = () => {
 					</Title>
 					<Text
 						size='lg'
-						className='text-white text-center animate-pulse motion-safe:animate-pulse'>
+						className='text-white text-center motion-safe:animate-pulse mt-10'>
 						A Reliable Cloud Logging service
 					</Text>
 				</div>
@@ -32,5 +32,3 @@ const Home = () => {
 		</>
 	);
 };
-
-export default Home;
