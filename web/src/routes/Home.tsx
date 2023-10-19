@@ -4,7 +4,7 @@ import Particles from '../components/ui/animations/particles/Particles';
 export default () => {
 	return (
 		<>
-			<div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+			<div className='relative w-screen h-screen'>
 				<div className='flex flex-col justify-center items-center h-screen'>
 					<Title
 						order={1}
@@ -14,19 +14,12 @@ export default () => {
 					</Title>
 					<Text
 						size='lg'
-						className='text-white text-center motion-safe:animate-pulse mt-10'>
-						A Reliable Cloud Logging service
+						className='text-white text-center animate-pulse mt-10'>
+						A Reliable Cloud Logging Solution
 					</Text>
 				</div>
 			</div>
-			<div
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					zIndex: 0,
-					mixBlendMode: 'screen',
-				}}>
+			<div className='absolute top-0 left-0 z-0 mix-blend-screen'>
 				<Particles />
 			</div>
 		</>
