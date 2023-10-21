@@ -4,13 +4,19 @@ import { Session } from '../lib/types';
 
 export default () => {
 	const [session, setSession] = useState<Session | null>(null);
-    const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session);
-            setLoading(false);
-		});
+		supabase.auth
+			.getSession()
+			.then(({ data: { session } }) => {
+				setSession(session);
+				setLoading(false);
+			})
+			.catch(() => {
+				setSession(null);
+				setLoading(false);
+			});
 
 		const {
 			data: { subscription },
