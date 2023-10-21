@@ -1,1 +1,1 @@
-export type { Session } from "@supabase/supabase-js"
+export type { Session, User } from "@supabase/supabase-js"
