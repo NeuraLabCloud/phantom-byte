@@ -1,21 +1,18 @@
--- inserts a row into public.profiles
-CREATE FUNCTION public.handle_new_user() RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER
-SET
-  search_path = public AS $ $ -- This will be passed to the supabase function body
-  BEGIN -- We want to pass the id, email to the new clients object
+-- Define a function that handles the insertion of a new user into the public.clients table
+CREATE
+OR REPLACE FUNCTION public.handle_new_user() RETURNS TRIGGER LANGUAGE plpgsql AS $ $ BEGIN -- Insert a new row into the public.clients table using the values from the new user
 INSERT INTO
   public.clients (user_id, email)
 VALUES
-  (new.id, new.email);
+  (NEW.id, NEW.email);
 
+-- You need to return the NEW variable to complete the trigger operation
 RETURN NEW;
 
 END;
 
-$ $;
-
--- trigger the function every time a user is created
-create trigger on_auth_user_created
-after
-insert
-  on auth.users for each row execute procedure public.handle_new_user();
+-- Create a trigger to execute the function every time a user is created in the auth.users table
+CREATE TRIGGER on_auth_user_created
+AFTER
+INSERT
+  ON auth.users FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
