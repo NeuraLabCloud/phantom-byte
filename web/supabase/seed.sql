@@ -1,8 +1,8 @@
 -- Seed data for projects table
 INSERT INTO public.projects (created_at, members, team_email, description) 
 VALUES 
-    ('2023-10-15 07:00:00', '{1,2}', 'team1@example.com', 'First project'),
-    ('2023-10-14 06:00:00', '{3,4}', 'team2@example.com', 'Second project');
+    ('2023-10-15 07:00:00', '{6,2}', 'team1@example.com', 'First project'),
+    ('2023-10-14 06:00:00', '{6,4}', 'team2@example.com', 'Second project');
 
 -- Seed data for clients table
 INSERT INTO public.clients (user_id, created_at, role, project_1, project_2, email) 
