@@ -27,6 +27,7 @@ import {
 import { IconChevronDown } from '@tabler/icons-react';
 import AppAvatar from '../components/ui/AppAvatar';
 import { Link } from 'react-router-dom';
+import useSession from '../hooks/useSession';
 
 interface DashboardPageProps {}
 
@@ -69,6 +70,7 @@ const DashboardPage: FC<DashboardPageProps> = ({}) => {
 	const [navOpened, { toggle: toggleNavOpen }] = useDisclosure();
 	const pinned = useHeadroom({ fixedAt: 120 });
 	const [active, setActive] = useState('Billing');
+	const { session } = useSession();
 
 	const items = headerLinks.map((mappedLinks) => {
 		const menuItems = mappedLinks.links?.map((item) => (
@@ -191,7 +193,7 @@ const DashboardPage: FC<DashboardPageProps> = ({}) => {
 				</div>
 			</AppShell.Navbar>
 
-			<AppShell.Main>main contents</AppShell.Main>
+			<AppShell.Main>Hello {session?.user.email}</AppShell.Main>
 		</AppShell>
 	);
 };
