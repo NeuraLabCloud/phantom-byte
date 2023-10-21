@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 
 const theme = createTheme({
 	fontFamily: 'Open Sans, sans-serif',
-	primaryColor: 'teal',
+	primaryColor: 'violet',
 });
 
 interface MantineClientProviderProps {
