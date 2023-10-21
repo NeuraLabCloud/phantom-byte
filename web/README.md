@@ -17,7 +17,7 @@ pnpm supabase start
 
 ## Production
 
-In production the cloud instance is used for the database. To run the database use the following command. Production 
+In production the cloud instance is used for the database. To run the database use the following command. Production
 Env variables are used for the database and not these local ones.
 
 To push local db changes to the cloud production instance use the following command:
