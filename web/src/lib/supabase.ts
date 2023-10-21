@@ -4,12 +4,10 @@ import {
 	createClient,
 } from '@supabase/supabase-js';
 import { Database } from './schema';
+import { Client } from './types';
 
 const projectUrl = import.meta.env.VITE_SUPABASE_AUTH_URL as string | undefined;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
-
-console.log('projectUrl', projectUrl);
-console.log('anonKey', anonKey);
 
 if (!projectUrl) {
 	throw new Error(
@@ -46,4 +44,38 @@ export async function getSession(): Promise<Session | null> {
 export async function isAuthenticated(): Promise<boolean> {
 	const session = await getSession();
 	return session !== null;
+}
+
+export async function getClientAccount({
+	user_id,
+}: {
+	user_id: string | undefined;
+}): Promise<Client | null> {
+	if (!user_id) return null;
+
+	try {
+		console.log('user_id', user_id);
+
+		let { data: client, error } = await supabase
+			.from('clients')
+			.select('*')
+			.eq('user_id', user_id)
+			.single();
+
+		if (error) {
+			console.error('Error fetching client:', error);
+			return null;
+		}
+
+		if (!client) {
+			console.log('No client found with the specified user_id');
+			return null;
+		}
+
+		console.log('client', client);
+		return client;
+	} catch (error) {
+		console.error('An error occurred while fetching client:', error);
+		return null;
+	}
 }

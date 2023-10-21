@@ -4,17 +4,13 @@ import { AppShell } from '@mantine/core';
 
 import Header from '../components/routes/Header';
 import SideNav from '../components/routes/SideNav';
-import { useAuth } from '../hooks/useAuth';
+import MainContent from '../components/routes/MainContent';
 
 interface DashboardPageProps {}
 
 const DashboardPage: FC<DashboardPageProps> = ({}) => {
 	const [navOpened, { toggle: toggleNavOpen }] = useDisclosure();
 	const pinned = useHeadroom({ fixedAt: 120 });
-
-	const auth = useAuth();
-
-	console.log(auth);
 
 	return (
 		<AppShell
@@ -34,7 +30,9 @@ const DashboardPage: FC<DashboardPageProps> = ({}) => {
 				<SideNav />
 			</AppShell.Navbar>
 
-			<AppShell.Main>Hello {auth?.user?.email}</AppShell.Main>
+			<AppShell.Main>
+				<MainContent />
+			</AppShell.Main>
 		</AppShell>
 	);
 };
