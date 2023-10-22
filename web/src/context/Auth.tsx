@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
-import { getClientAccount, supabase } from "../lib/supabase";
+import { getClientAccount, getUser, supabase } from "../lib/supabase";
 import { useUserStore } from "../lib/stores/user";
-import { Database } from "../lib/schema";
-import { Client } from "../lib/types";
+import { Client, Payload } from "../lib/types";
 
 interface Auth {
   isAuthenticated: boolean;
@@ -22,21 +21,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const userStore = useUserStore(); // Access the global user store
 
   useEffect(() => {
-    supabase.auth
-      .getSession()
-      .then(({ data: { session } }) => {
-        setSession(session);
-        const user = session?.user ?? null;
-        userStore.setUser(user); // Set the user in the global store
-        if (user) {
-          setIsAuthenticated(true);
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        userStore.unsetUser(); // Unset the user in the global store
-        setLoading(false);
-      });
+    setLoading(true);
+    getUser().then((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      }
+
+      userStore.setUser(user); // Set or unset the user in the global store
+      setLoading(false);
+    });
 
     const {
       data: { subscription },
@@ -64,8 +57,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setClient(data);
     }
 
-    fetchClient();
-  }, [isAuthenticatedContext]);
+    // If the client does not exist in state, fetch it
+    // This is to prevent the client being null if no subscription is received yet
+    if (!client) {
+      fetchClient();
+    }
+
+    const realtimeClient = supabase
+      .channel("clients")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "clients" },
+        (payload) => {
+          console.log("Change received!", payload);
+          const data = payload as Payload; // Adding type support to payload
+          setClient(data.new);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      realtimeClient.unsubscribe();
+    };
+  }, []);
 
   if (loading) {
     return null;

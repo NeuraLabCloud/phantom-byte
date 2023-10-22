@@ -1,0 +1,1 @@
+ALTER publication supabase_realtime add TABLE public.clients;

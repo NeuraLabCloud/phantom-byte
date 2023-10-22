@@ -1,8 +1,11 @@
 import { Button, Center, Text, Title } from "@mantine/core";
 import Particles from "../components/ui/animations/particles/Particles";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default () => {
+  const auth = useAuth()?.isAuthenticated;
+
   return (
     <>
       <div className="relative w-screen h-screen">
@@ -28,7 +31,9 @@ export default () => {
               variant="outline"
               className="mt-5 animate-pulse"
             >
-              <Text className="text-white">Get Started</Text>
+              <Text className="text-white">
+                {auth ? "Dashboard" : "Get Started"}
+              </Text>
             </Button>
           </Center>
         </div>

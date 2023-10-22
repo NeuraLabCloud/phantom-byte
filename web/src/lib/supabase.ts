@@ -34,6 +34,7 @@ const options = {
 
 export const supabase = createClient<Database>(projectUrl, anonKey, options);
 
+/** Gets the current user session */
 export async function getSession(): Promise<Session | null> {
   return supabase.auth
     .getSession()
@@ -41,9 +42,19 @@ export async function getSession(): Promise<Session | null> {
     .catch(() => null);
 }
 
+/** Get the JSON object for the logged in user. */
+export async function getUser() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return user;
+}
+
+/** Checks if the current user is authenticated or not */
 export async function isAuthenticated(): Promise<boolean> {
-  const session = await getSession();
-  return session !== null;
+  const u = await getUser();
+  return u !== null;
 }
 
 export async function getClientAccount({
