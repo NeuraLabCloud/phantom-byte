@@ -7,6 +7,7 @@ import NotFound from "./NotFound";
 import Login from "./Login";
 import Logout from "./Logout";
 import { isAuthenticated } from "../lib/supabase";
+import NeonCat from "./NeonCat";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       if (!isLoggedIn) throw redirect("/login");
       return null;
     },
+  },
+  {
+    path: "/neon-cat",
+    element: <NeonCat />,
   },
   {
     path: "*",

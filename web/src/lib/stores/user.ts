@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 type UserStore = {
   user: User | null;
-  setUser: (user: User | null) => void;
+  setUser: (user: User) => void;
   unsetUser: () => void;
   getUser: () => User | null;
   isAuthenticated: () => boolean;

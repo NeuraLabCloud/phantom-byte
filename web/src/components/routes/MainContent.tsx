@@ -7,12 +7,16 @@ interface MainContentProps {}
 const MainContent: FC<MainContentProps> = ({}) => {
   const auth = useAuth();
 
+  // console.log("auth", auth);
+  // console.log("auth?.user", auth?.user);
+  // console.log("auth.client", auth?.client);
+
   const user = {
     created_at: auth?.user?.created_at,
     email: auth?.user?.email,
     aud: auth?.user?.aud,
     av: auth?.user?.user_metadata?.avatar_url,
-    role: auth?.client?.role,
+    role: auth?.client?.role ?? "Unknown"
   };
 
   return (

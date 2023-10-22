@@ -11,7 +11,6 @@ const Login: FC<LoginProps> = ({}) => {
   return (
     <>
       <ScreenCenter>
-        <Center>
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
@@ -20,7 +19,6 @@ const Login: FC<LoginProps> = ({}) => {
             theme="dark"
             redirectTo="/dashboard"
           />
-        </Center>
       </ScreenCenter>
     </>
   );

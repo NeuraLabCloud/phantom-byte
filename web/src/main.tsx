@@ -11,7 +11,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { router } from "./routes/_router.tsx";
 import MantineClientProvider from "./components/providers/MantineClientProvider.tsx";
 import LoadSpinner from "./components/ui/animations/loading/LoadSpinner.tsx";
-import { AuthProvider } from "./context/Auth.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 function fallbackRender({ error, resetErrorBoundary }: any) {
   resetErrorBoundary();
