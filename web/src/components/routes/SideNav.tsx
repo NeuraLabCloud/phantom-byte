@@ -4,13 +4,11 @@ import { Group, Code } from "@mantine/core";
 import {
   IconBellRinging,
   IconReceipt2,
-  IconFingerprint,
-  IconKey,
-  IconDatabaseImport,
-  Icon2fa,
   IconSettings,
   IconHome,
   IconLogout,
+  IconDatabaseCog,
+  Icon2fa,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import AppAvatar from "../ui/AppAvatar";
@@ -18,17 +16,17 @@ import AppAvatar from "../ui/AppAvatar";
 interface SideNavProps {}
 
 const SideNav: FC<SideNavProps> = ({}) => {
-  const [active, setActive] = useState("Billing");
+  const [active, setActive] = useState('Dashboard');
 
   const sideNavData = [
-    { link: "", label: "Notifications", icon: IconBellRinging },
-    { link: "", label: "Billing", icon: IconReceipt2 },
-    { link: "", label: "Security", icon: IconFingerprint },
-    { link: "", label: "SSH Keys", icon: IconKey },
-    { link: "", label: "Databases", icon: IconDatabaseImport },
-    { link: "", label: "Authentication", icon: Icon2fa },
-    { link: "", label: "Other Settings", icon: IconSettings },
-  ];
+    { link: '', label: 'Dashboard', icon: Icon2fa },
+    { link: '/notifications', label: 'Notifications', icon: IconBellRinging },
+    { link: '/projects', label: 'Projects', icon: IconDatabaseCog },
+			{ link: '/billing', label: 'Billing', icon: IconReceipt2 },
+			{ link: '/settings', label: 'Account Settings', icon: IconSettings },
+			// { link: '', label: 'Security', icon: IconFingerprint },
+			// { link: '', label: 'SSH Keys', icon: IconKey },
+		];
 
   const links = sideNavData.map((item) => (
     <Link

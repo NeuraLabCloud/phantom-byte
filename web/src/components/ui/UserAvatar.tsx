@@ -6,6 +6,7 @@ interface UserAvatarProps {
   url?: string;
 }
 
+// url found in auth?.user?.user_metadata?.avatar_url,
 const UserAvatar: FC<UserAvatarProps> = ({ url, provider }) => {
   const getUrl = () => {
     switch (provider) {

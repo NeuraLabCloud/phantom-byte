@@ -1,27 +1,40 @@
-import React, { FC } from "react";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { supabase } from "../lib/supabase";
-import { Center } from "@mantine/core";
-import ScreenCenter from "../components/ui/ScreenCenter";
+import React, { FC } from 'react';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { supabase } from '../lib/supabase';
+import ScreenCenter from '../components/ui/ScreenCenter';
+import { Button, Center, Container, Title } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}) => {
-  return (
-    <>
-      <ScreenCenter>
-          <Auth
-            supabaseClient={supabase}
-            appearance={{ theme: ThemeSupa }}
-            providers={["github", "google"]}
-            onlyThirdPartyProviders={true}
-            theme="dark"
-            redirectTo="/dashboard"
-          />
-      </ScreenCenter>
-    </>
-  );
+	const urlParams = new URLSearchParams(window.location.search);
+	const redirect = urlParams.get('redirect');
+
+	return (
+			<ScreenCenter>
+				<Container>
+					<Auth
+						supabaseClient={supabase}
+						appearance={{ theme: ThemeSupa }}
+						providers={['github', 'google']}
+						onlyThirdPartyProviders={true}
+						theme='dark'
+						redirectTo={redirect || '/dashboard'}
+					/>
+					<Center>
+						<Button
+							variant='outline'
+							size='xs'
+							component={Link}
+							to={'/'}>
+							<Title className='text-zinc-300 text-lg'>Home</Title>
+						</Button>
+					</Center>
+				</Container>
+			</ScreenCenter>
+	);
 };
 
 export default Login;

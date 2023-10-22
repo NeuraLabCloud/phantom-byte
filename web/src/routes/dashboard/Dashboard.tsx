@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import { useDisclosure, useHeadroom } from "@mantine/hooks";
 import { AppShell } from "@mantine/core";
 
-import Header from "../components/routes/Header";
-import SideNav from "../components/routes/SideNav";
-import MainContent from "../components/routes/MainContent";
+import Header from "../../components/routes/Header";
+import SideNav from "../../components/routes/SideNav";
+import MainContent from "../../components/routes/MainContent";
 
 interface DashboardPageProps {}
 

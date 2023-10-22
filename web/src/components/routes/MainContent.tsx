@@ -1,34 +1,27 @@
-import React, { FC } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import UserAvatar from "../ui/UserAvatar";
+import React, { FC } from 'react';
+import { useLocation } from 'react-router-dom';
+import Settings from '../../routes/dashboard/Settings';
+
+type PathNames = '/dashboard' | '/dashboard/settings';
 
 interface MainContentProps {}
 
 const MainContent: FC<MainContentProps> = ({}) => {
-  const auth = useAuth();
+	const location = useLocation();
+	const pathName = location.pathname as PathNames;
 
-  // console.log("auth", auth);
-  // console.log("auth?.user", auth?.user);
-  // console.log("auth.client", auth?.client);
+	const renderContent = () => {
+		switch (pathName) {
+			case "/dashboard":
+				return <div>Dashboard</div>;
+			case '/dashboard/settings':
+				return <Settings />;
+			default:
+				return <div>Not Found</div>;
+		}
+	};
 
-  const user = {
-    created_at: auth?.user?.created_at,
-    email: auth?.user?.email,
-    aud: auth?.user?.aud,
-    av: auth?.user?.user_metadata?.avatar_url,
-    role: auth?.client?.role ?? "Unknown"
-  };
-
-  return (
-    <>
-      <UserAvatar
-        url={user.av}
-        provider={auth?.user?.app_metadata.provider as any}
-      />
-      <br />
-      {JSON.stringify(user, null, 2)}
-    </>
-  );
+	return <>{renderContent()}</>;
 };
 
 export default MainContent;

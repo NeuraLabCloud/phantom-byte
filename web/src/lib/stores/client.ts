@@ -46,7 +46,7 @@ export const useClientStore = create<ClientStore>((set, get) => ({
  * Status can be `authenticated`, `unauthenticated`, or `loading`
  */
 export const useClientAuthStore = create<ClientAuthStore>((set, get) => ({
-	status: 'loading',
+	status: "unauthenticated",
 	setAuthenticated: (status) => set({ status }),
 	isAuthenticated: () => get().status === 'authenticated',
 }));
