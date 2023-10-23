@@ -25,3 +25,8 @@ To push local db changes to the cloud production instance use the following comm
 ```shell
 pnpm supabase db push --password <password>
 ```
+
+## Contributing
+
+- [Current Issues](./issues.md)
+- [Todo List](./todo.md)
