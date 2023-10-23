@@ -106,7 +106,7 @@ SELECT
 -- UPDATE POLICY'S
 CREATE POLICY update_policy_clients
 ON public.clients
-FOR UPDATE USING (
+FOR UPDATE TO authenticated USING (
   auth.jwt() ->> 'email' = email
 ) WITH CHECK (
   auth.jwt() ->> 'email' = email

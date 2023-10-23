@@ -5,7 +5,6 @@ import { useUserStore } from '../lib/stores/user';
 import { Client, Payload } from '../lib/types';
 import { useClientAuthStore, useClientStore } from '../lib/stores/client';
 import LoadSpinner from '../components/ui/animations/loading/LoadSpinner';
-import { notifications } from '@mantine/notifications';
 
 interface Auth {
 	isAuthenticated: boolean;
@@ -17,7 +16,6 @@ export const AuthContext = createContext<Auth | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [loading, setLoading] = useState(true);
-
 	const userStore = useUserStore(); // Access the global user store
 	const clientStore = useClientStore(); // Access the global client store
 	const clientAuthStore = useClientAuthStore(); // Access the global client auth store
@@ -55,21 +53,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 		const {
 			data: { subscription },
-		} = supabase.auth.onAuthStateChange((event, session) => {
+		} = supabase.auth.onAuthStateChange((_event, session) => {
 			const user = session?.user ?? null;
 			if (user) {
 				clientAuthStore.setAuthenticated('authenticated');
 				userStore.setUser(user); // Set or unset the user in the global store
 			} else {
 				clientAuthStore.setAuthenticated('unauthenticated');
-			}
-
-			if (event === 'SIGNED_IN') {
-				notifications.show({
-					message: 'You have successfully signed in!',
-					autoClose: 3000,
-					color: 'violet',
-				});
 			}
 		});
 
