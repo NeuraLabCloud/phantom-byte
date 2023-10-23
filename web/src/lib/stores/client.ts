@@ -47,6 +47,17 @@ export const useClientStore = create<ClientStore>((set, get) => ({
  */
 export const useClientAuthStore = create<ClientAuthStore>((set, get) => ({
   status: "unauthenticated",
-  setAuthenticated: (status) => set({ status }),
+  setAuthenticated: (status) => {
+    localStorageAuthCache.set(status);
+    set({ status });
+  },
   isAuthenticated: () => get().status === "authenticated",
 }));
+
+/** A workaround to use our client side auth cache outside of hooks. */
+export const localStorageAuthCache = {
+  set: ( status : AuthStatus ) => localStorage.setItem("authStatus", status),
+  get: () : AuthStatus => localStorage.getItem("authStatus") as AuthStatus,
+  clear: () => localStorage.removeItem("authStatus"),
+  isAuthenticated: () : boolean => localStorage.getItem("authStatus") === "authenticated"
+}

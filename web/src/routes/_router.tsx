@@ -8,6 +8,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import { isAuthenticated } from "../lib/supabase";
 import NeonCat from "./NeonCat";
+import {localStorageAuthCache} from "../lib/stores/client.ts";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     loader: async () => {
-      let isLoggedIn = await isAuthenticated();
+      // Avoid API calls for users we know are not logged in yet.
+      let isLoggedIn = localStorageAuthCache.isAuthenticated()
       if (isLoggedIn) throw redirect("/dashboard");
       return null;
     },
@@ -30,7 +32,8 @@ export const router = createBrowserRouter([
     path: "/logout",
     element: <Logout />,
     loader: async () => {
-      let isLoggedIn = await isAuthenticated();
+      // Avoid API calls for users we know are not logged in yet.
+      let isLoggedIn = localStorageAuthCache.isAuthenticated()
       if (!isLoggedIn) throw redirect("/login");
       return null;
     },
@@ -39,7 +42,8 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     loader: async () => {
-      let isLoggedIn = await isAuthenticated();
+      // Avoid API calls for users we know are not logged in yet.
+      let isLoggedIn = localStorageAuthCache.isAuthenticated()
       if (!isLoggedIn) throw redirect("/login");
       return null;
     },
@@ -48,7 +52,8 @@ export const router = createBrowserRouter([
         path: "/dashboard/settings",
         element: <></>,
         loader: async () => {
-          let isLoggedIn = await isAuthenticated();
+          // Avoid API calls for users we know are not logged in yet.
+          let isLoggedIn = localStorageAuthCache.isAuthenticated()
           if (!isLoggedIn) {
             let params = new URLSearchParams();
             params.set("redirect", "/dashboard/settings");

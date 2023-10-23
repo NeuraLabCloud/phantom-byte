@@ -43,7 +43,7 @@ export async function getSession(): Promise<Session | null> {
     .catch(() => null);
 }
 
-/** Get the JSON object for the logged in user. */
+/** Get the JSON object for the logged-in user. */
 export async function getUser() {
   const {
     data: { user },
