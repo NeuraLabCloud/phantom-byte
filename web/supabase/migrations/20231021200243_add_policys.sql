@@ -1,3 +1,5 @@
+-- SELECT POLICY'S
+
 -- Allow users to access their own data in the public.clients table
 CREATE POLICY select_policy_clients ON public.clients FOR
 SELECT
@@ -100,3 +102,12 @@ SELECT
         )
     )
   );
+
+-- UPDATE POLICY'S
+CREATE POLICY update_policy_clients
+ON public.clients
+FOR UPDATE USING (
+  auth.jwt() ->> 'email' = email
+) WITH CHECK (
+  auth.jwt() ->> 'email' = email
+);

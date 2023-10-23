@@ -4,24 +4,46 @@ import ScreenCenter from '../components/ui/ScreenCenter';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useClientAuthStore } from '../lib/stores/client';
+import { notifications } from '@mantine/notifications';
 
 interface LogoutProps {}
 
 const Logout: FC<LogoutProps> = ({}) => {
 	const [logoutTriggered, setLogoutTriggered] = React.useState(false);
-  const clientAuthStore = useClientAuthStore();
+	const clientAuthStore = useClientAuthStore();
 
 	const handleLogout = () => {
-    supabase.auth.signOut({
-      scope: 'local',
+		const id = notifications.show({
+			loading: true,
+			title: 'Logging out...',
+			message: 'Please wait while we log you out.',
+			color: 'yellow',
+			autoClose: false,
+			withCloseButton: false,
 		});
-    setLogoutTriggered(true);
+
+		supabase.auth
+			.signOut({
+				scope: 'local',
+			})
+			.then(() => {
+				notifications.update({
+					id,
+					title: 'Logged out!',
+					message: 'You have been logged out.',
+					color: "violet",
+					loading: false,
+					autoClose: 3000,
+					withCloseButton: true,
+				});
+				setLogoutTriggered(true);
+			});
 	};
 
 	useEffect(() => {
-    if (logoutTriggered) {
-      clientAuthStore.setAuthenticated('unauthenticated');
-    }
+		if (logoutTriggered) {
+			clientAuthStore.setAuthenticated('unauthenticated');
+		}
 	}, [logoutTriggered]);
 
 	return (

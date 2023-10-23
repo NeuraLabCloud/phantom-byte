@@ -92,3 +92,47 @@ export async function getClientAccount({
 export async function getGlobalSystemSettings() {
 	throw new Error('Not implemented');
 }
+
+/**
+ * Updates the client's username
+ * @param user_id The user_id of the client
+ * @returns "success" if the update was successful, "error" otherwise
+ */
+export async function updateClientUsername(user_id: string, newUsername: string) {
+	try {
+		let { data: client, error } = await supabase
+			.from('clients')
+			.update({ username: newUsername })
+			.eq('user_id', user_id)
+			.select('*')
+			.single();
+
+		if (error) {
+			console.error('Error updating client username:', error);
+			return {
+				result: "error",
+				client: null
+			}
+		}
+
+		if (!client) {
+			console.error('No client found with the specified user_id');
+			return {
+				result: false,
+				client: null,
+			};
+		}
+
+		return {
+			result: 'success',
+			client,
+		};
+
+	} catch (error) {
+		console.error('An error occurred while updating the client username:', error);
+		return {
+			result: 'error',
+			client: null,
+		};
+	}
+}

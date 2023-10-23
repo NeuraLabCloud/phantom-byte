@@ -7,6 +7,7 @@
 - [ ] For the /dashboard page a simple getting started guide will be displayed with instructions on how to get started with the project.
 - [ ] Add a client ticket system for the client to report bugs, issues, and feature requests
 - [ ] Setup billing infrastructure for clients
+- [ ] Add a client/Server side cool-down system to prevent spamming of modules
 - [ ] Allow project creators to invite other users to their projects
 - [ ] Setup client notification system to push notifications to client dashboards
 - [ ] Admin panel for client management ( Admin Role+ Users)

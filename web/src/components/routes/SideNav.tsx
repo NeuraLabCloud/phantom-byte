@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import navbarStyles from '../../styles/navbar.module.css';
-import { Group, Code } from '@mantine/core';
+import { Group, Code, Center } from '@mantine/core';
 import {
 	IconBellRinging,
 	IconReceipt2,
@@ -12,12 +12,14 @@ import {
 } from '@tabler/icons-react';
 import { Link, useLocation } from 'react-router-dom';
 import UserAvatar from '../ui/UserAvatar';
+import useMetadata from '../../hooks/useMetadata';
 
 interface SideNavProps {}
 
 const SideNav: FC<SideNavProps> = ({}) => {
 	const [active, setActive] = useState('Dashboard');
 	const location = useLocation();
+	const metadata = useMetadata();
 
 	const sideNavData = [
 		{ link: '', label: 'Dashboard', icon: Icon2fa },
@@ -62,8 +64,11 @@ const SideNav: FC<SideNavProps> = ({}) => {
 				<Group
 					className={navbarStyles.header}
 					justify='space-between'>
-					<UserAvatar />
-					<Code fw={700}>v0.1.1</Code>
+					<Center>
+						<UserAvatar />
+						<Code className='ml-5'>{metadata.username}</Code>
+					</Center>
+					{/* <Code fw={700}>v0.1.1</Code> */}
 				</Group>
 				{links}
 			</div>

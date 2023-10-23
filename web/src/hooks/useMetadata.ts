@@ -41,19 +41,22 @@ export default () => {
 	switch (provider) {
 		case 'github':
 			const data = auth?.user?.user_metadata as GithubMetadata;
+			// The username from the auth metadata can be stale so we use the client username instead
+			const username = auth?.client?.username as string;
 
 			return {
 				email: data.email,
 				avatar_url: data.avatar_url,
-				username: data.preferred_username || data.user_name,
+				username,
 			};
 		case 'google':
 			const data2 = auth?.user?.user_metadata as GoogleMetadata;
+			const username2 = auth?.client?.username as string;
 
 			return {
 				email: data2.email,
 				avatar_url: data2.avatar_url,
-				username: data2.name,
+				username: username2,
 			};
 		default:
 			return {
