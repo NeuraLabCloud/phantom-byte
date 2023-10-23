@@ -47,11 +47,6 @@ const Settings: FC<SettingsProps> = ({}) => {
   });
 
   const handleSubmit = (values: { username: string }) => {
-    // Todo - update user settings
-    console.log(values);
-
-    console.log("user_id", auth?.user?.id);
-
     updateClientUsername(auth?.user?.id!, values.username).then((res) => {
       if (res.result === "error") {
         notifications.show({
