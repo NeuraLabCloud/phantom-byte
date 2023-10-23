@@ -18,9 +18,9 @@ export const AuthContext = createContext<Auth | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
-  const userStore = useUserStore(); // Access the global user store
-  const clientStore = useClientStore(); // Access the global client store
-  const clientAuthStore = useClientAuthStore(); // Access the global client auth store
+  const userStore = useUserStore();
+  const clientStore = useClientStore();
+  const clientAuthStore = useClientAuthStore();
 
   async function fetchUser() {
     return fetch("/auth/v1/user", {
@@ -52,8 +52,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         fetchClientAccount(user.id).then((client) => {
           if (client) {
             clientStore.setClient(client);
-          } else {
-            console.error("No client found for user!");
           }
         });
       } else {
@@ -68,6 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         { event: "*", schema: "public", table: "clients" },
         (payload) => {
           const data = payload as Payload; // Adding type support to payload
+          console.log('Realtime event received!', data)
           clientStore.setClient(data.new);
         },
       )

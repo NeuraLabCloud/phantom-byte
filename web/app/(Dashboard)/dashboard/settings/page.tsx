@@ -25,7 +25,6 @@ type CurrentSettings = {
 interface ComponentProps {}
 
 const Component: FC<ComponentProps> = async ({}) => {
-  const [loading, setLoading] = useState(true);
   const [currentSettings, setCurrentSettings] = useState<CurrentSettings>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -59,7 +58,7 @@ const Component: FC<ComponentProps> = async ({}) => {
     })
   }
 
-  const handleSubmit = async (values: { username: string }) => {
+  const handleSubmit = (values: { username: string }) => {
     setIsSubmitting(true);
     submitUpdatedClient(auth?.user?.id!, values.username).then((result) => {
       notifications.show({
@@ -79,7 +78,6 @@ const Component: FC<ComponentProps> = async ({}) => {
     };
 
     setCurrentSettings(settings);
-    setLoading(false);
   }, [metadata.username]);
 
 
@@ -88,7 +86,7 @@ const Component: FC<ComponentProps> = async ({}) => {
         <Center>
           <Title className="mt-10">Account Settings</Title>
         </Center>
-        {(!loading && currentSettings && (
+        {(currentSettings && (
             <Center className="mt-10">
               <SimpleGrid cols={1}>
                 <Tabs color="teal" defaultValue="first">
@@ -110,7 +108,7 @@ const Component: FC<ComponentProps> = async ({}) => {
 
                   <Tabs.Panel value="second" pt="xs">
                     <Box maw={340} mx="auto">
-                      <form onSubmit={form.onSubmit(() => handleSubmit)}>
+                      <form onSubmit={form.onSubmit(handleSubmit)}>
                         <TextInput
                             withAsterisk
                             label="Update Username"
