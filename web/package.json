@@ -17,6 +17,7 @@
     "@mantine/hooks": "^7.1.5",
     "@mantine/modals": "^7.1.5",
     "@mantine/notifications": "^7.1.5",
+    "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/auth-ui-react": "^0.4.6",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.38.2",
@@ -40,6 +41,7 @@
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "^1.9.0",
     "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.0.3",
     "supabase": "^1.106.1",
     "tailwindcss": "^3",
     "typescript": "^5"
