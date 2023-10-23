@@ -1,6 +1,8 @@
 # Todo list
 
-- [ ] Create client account settings page. (Change username, delete projects, etc.)
+- [] FIX Production hosting where the client side pages are not loading? Might be a vercel problem or supabase config problem... need to debug this later...
+
+- [x] Create client account settings page. (Change username, delete projects, etc.)
 - [ ] Create project management panel for clients
 - [ ] Create charts for project logs
 - [ ] Make static pages for website ( About, Pricing, etc.)
