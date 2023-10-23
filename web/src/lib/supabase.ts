@@ -1,4 +1,5 @@
 import {
+	PostgrestError,
 	Session,
 	SupabaseClientOptions,
 	createClient,
@@ -110,21 +111,24 @@ export async function updateClientUsername(user_id: string, newUsername: string)
 		if (error) {
 			console.error('Error updating client username:', error);
 			return {
-				result: "error",
-				client: null
-			}
+				result: 'error',
+				pg_error: createCleanError(error),
+				client: null,
+			};
 		}
 
 		if (!client) {
 			console.error('No client found with the specified user_id');
 			return {
-				result: false,
+				result: 'error',
+				pg_error: null,
 				client: null,
 			};
 		}
 
 		return {
 			result: 'success',
+			pg_error: null,
 			client,
 		};
 
@@ -132,7 +136,13 @@ export async function updateClientUsername(user_id: string, newUsername: string)
 		console.error('An error occurred while updating the client username:', error);
 		return {
 			result: 'error',
+			pg_error: null,
 			client: null,
 		};
 	}
+}
+
+
+function createCleanError(error: PostgrestError) {
+	return `Error ${error.code}: ${error.message}`
 }

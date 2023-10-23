@@ -56,7 +56,9 @@ const Settings: FC<SettingsProps> = ({}) => {
 			if (res.result === 'error') {
 				notifications.show({
 					title: 'Error',
-					message: `There was an error updating your settings. Please try again.`,
+					message:
+						res.pg_error ||
+						`There was an error updating your settings. Please try again.`,
 					color: 'red',
 					autoClose: 5000,
 				});
