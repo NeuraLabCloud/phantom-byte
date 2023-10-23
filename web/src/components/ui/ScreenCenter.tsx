@@ -7,12 +7,12 @@ interface ScreenCenterProps {
 
 const ScreenCenter: FC<ScreenCenterProps> = ({ children }) => {
   return (
-			<>
-				<div className='flex flex-col justify-center h-screen'>
-					<Center>{children}</Center>
-				</div>
-			</>
-		);
+    <>
+      <div className="flex flex-col justify-center h-screen">
+        <Center>{children}</Center>
+      </div>
+    </>
+  );
 };
 
 export default ScreenCenter;

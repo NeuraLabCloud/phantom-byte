@@ -17,4 +17,8 @@ export type Payload = {
   errors: null | any;
 };
 
-export type PathNames = '/dashboard' | '/dashboard/settings' | "/login" | "/logout"
+export type PathNames =
+  | "/dashboard"
+  | "/dashboard/settings"
+  | "/login"
+  | "/logout";

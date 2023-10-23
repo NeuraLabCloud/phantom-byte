@@ -15,8 +15,7 @@ const AppAvatar: FC<AppAvatarProps> = ({ radius }) => {
         // src="logo-no-bg.png"
         alt="App Logo"
         radius={radius ?? "sm"}
-      >
-      </Avatar>
+      ></Avatar>
     </>
   );
 };
