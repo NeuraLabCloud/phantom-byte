@@ -5,7 +5,7 @@ import { ColorSchemeScript } from "@mantine/core";
 
 // Style imports
 import "@mantine/core/styles.css";
-import "./globals.css";
+import "../styles/globals.css";
 
 // Component imports
 import MantineClientProvider from "@/components/providers/MantineClientProvider";

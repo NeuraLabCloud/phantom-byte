@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import DashboardAppShell from "@/components/ui/AppShell/DashboardAppShell";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -7,8 +8,9 @@ interface DashboardLayoutProps {
 const DashboardLayout: FC<DashboardLayoutProps> = async ({ children }) => {
   return (
     <>
-      hello world
-      {children}
+      <DashboardAppShell>
+        {children}
+      </DashboardAppShell>
     </>
   );
 };
