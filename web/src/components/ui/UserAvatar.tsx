@@ -1,29 +1,21 @@
-import { Avatar } from "@mantine/core";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+import { Avatar } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import useMetadata from '../../hooks/useMetadata';
 
-interface UserAvatarProps {
-  provider: "github" | "google";
-  url?: string;
-}
+interface UserAvatarProps {}
 
-// url found in auth?.user?.user_metadata?.avatar_url,
-const UserAvatar: FC<UserAvatarProps> = ({ url, provider }) => {
-  const getUrl = () => {
-    switch (provider) {
-      case "github":
-        return url;
-      case "google":
-        return url + "?sz=200";
-      default:
-        return url;
-    }
-  };
+const UserAvatar: FC<UserAvatarProps> = ({}) => {
+	const { avatar_url } = useMetadata();
 
-  return url ? (
-    <Avatar src={getUrl.call(this)} alt="it's me" />
-  ) : (
-    <Avatar radius="xl" />
-  );
+	return (
+		<Avatar
+			src={avatar_url}
+			alt='User Avatar'
+			component={Link}
+			to={'/dashboard/settings'}
+		/>
+	);
 };
 
 export default UserAvatar;

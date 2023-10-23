@@ -12,11 +12,10 @@ const AppAvatar: FC<AppAvatarProps> = ({ radius }) => {
       <Avatar
         component={Link}
         to={"/"}
-        src="logo-no-bg.png"
+        // src="logo-no-bg.png"
         alt="App Logo"
         radius={radius ?? "sm"}
       >
-        Phantom Byte
       </Avatar>
     </>
   );

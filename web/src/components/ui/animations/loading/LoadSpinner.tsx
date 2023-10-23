@@ -1,5 +1,5 @@
-import "./LoadingSpinner.css";
 import React, { FC } from "react";
+import "./LoadingSpinner.css";
 
 interface LoadSpinnerProps {}
 

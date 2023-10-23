@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import Settings from '../../routes/dashboard/Settings';
-
-type PathNames = '/dashboard' | '/dashboard/settings';
+import { PathNames } from '../../lib/types';
 
 interface MainContentProps {}
 

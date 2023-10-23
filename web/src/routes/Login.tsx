@@ -11,17 +11,19 @@ interface LoginProps {}
 const Login: FC<LoginProps> = ({}) => {
 	const urlParams = new URLSearchParams(window.location.search);
 	const redirect = urlParams.get('redirect');
+	const redirectPath = redirect ? redirect : '/dashboard';
+	const fullUrl = window.location.origin + redirectPath;
 
 	return (
 			<ScreenCenter>
 				<Container>
-					<Auth
+					<Auth																															
 						supabaseClient={supabase}
 						appearance={{ theme: ThemeSupa }}
 						providers={['github', 'google']}
 						onlyThirdPartyProviders={true}
 						theme='dark'
-						redirectTo={redirect || '/dashboard'}
+						redirectTo={fullUrl}
 					/>
 					<Center>
 						<Button

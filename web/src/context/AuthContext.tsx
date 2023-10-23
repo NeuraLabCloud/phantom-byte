@@ -2,8 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { getClientAccount, getUser, supabase } from '../lib/supabase';
 import { useUserStore } from '../lib/stores/user';
-import { Client, Payload } from '../lib/types';
+import { Client, PathNames, Payload } from '../lib/types';
 import { useClientAuthStore, useClientStore } from '../lib/stores/client';
+import LoadSpinner from '../components/ui/animations/loading/LoadSpinner';
 
 interface Auth {
 	isAuthenticated: boolean;
@@ -14,35 +15,26 @@ interface Auth {
 export const AuthContext = createContext<Auth | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-	const [session, setSession] = useState<Session | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	const userStore = useUserStore(); // Access the global user store
 	const clientStore = useClientStore(); // Access the global client store
 	const clientAuthStore = useClientAuthStore(); // Access the global client auth store
 
-	let authStats = clientAuthStore.status;
-
 	useEffect(() => {
 		setLoading(true);
-
-		if (authStats === 'unauthenticated') {
-			setLoading(false);
-			return;
-		}
-
-		getClientAccount({ user_id: userStore.getUser()?.id }).then((client) => {
-			console.log('getClientAccount', client);
-			const auth = clientAuthStore.isAuthenticated();
-			if (auth && client) {
-				clientStore.setClient(client);
-			}
-		});
 
 		getUser().then((user) => {
 			if (user) {
 				clientAuthStore.setAuthenticated('authenticated');
-				userStore.setUser(user); // Set or unset the user in the global store
+				userStore.setUser(user);
+				getClientAccount({ user_id: user.id }).then((client) => {
+					if (client) {
+						clientStore.setClient(client);
+					} else {
+						console.error('No client found for user!');
+					}
+				});
 			} else {
 				clientAuthStore.setAuthenticated('unauthenticated');
 			}
@@ -63,7 +55,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session);
 			const user = session?.user ?? null;
 			if (user) {
 				clientAuthStore.setAuthenticated('authenticated');
@@ -79,14 +70,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			subscription.unsubscribe();
 			realtimeClient.unsubscribe();
 		};
-	}, [authStats]);
+	}, []);
 
 	if (loading) {
-		return null;
+		return <LoadSpinner />;
 	}
 
 	const authObject = {
-		isAuthenticated: !!session,
+		isAuthenticated: clientAuthStore.isAuthenticated(),
 		user: userStore.getUser(),
 		client: clientStore.getClient(),
 	};

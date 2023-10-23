@@ -8,7 +8,6 @@ import Login from './Login';
 import Logout from './Logout';
 import { isAuthenticated } from '../lib/supabase';
 import NeonCat from './NeonCat';
-import Settings from './dashboard/Settings';
 
 export const router = createBrowserRouter([
 	{
@@ -44,12 +43,10 @@ export const router = createBrowserRouter([
 			if (!isLoggedIn) throw redirect('/login');
 			return null;
 		},
-		// sub  routes for the /dashboard route
-		// no elements are needed as we handle them in the MainContent component
-		// not sure if this is the best way to do it but it works for now...
 		children: [
 			{
 				path: '/dashboard/settings',
+				element: <></>,
 				loader: async () => {
 					let isLoggedIn = await isAuthenticated();
 					if (!isLoggedIn) {
