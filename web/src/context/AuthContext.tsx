@@ -1,88 +1,97 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Session, User } from "@supabase/supabase-js";
-import { getClientAccount, getUser, supabase } from "../lib/supabase";
-import { useUserStore } from "../lib/stores/user";
-import { Client, PathNames, Payload } from "../lib/types";
-import { useClientAuthStore, useClientStore } from "../lib/stores/client";
-import LoadSpinner from "../components/ui/animations/loading/LoadSpinner";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { User } from '@supabase/supabase-js';
+import { getClientAccount, getUser, supabase } from '../lib/supabase';
+import { useUserStore } from '../lib/stores/user';
+import { Client, Payload } from '../lib/types';
+import { useClientAuthStore, useClientStore } from '../lib/stores/client';
+import LoadSpinner from '../components/ui/animations/loading/LoadSpinner';
+import { notifications } from '@mantine/notifications';
 
 interface Auth {
-  isAuthenticated: boolean;
-  user: User | null;
-  client: Client | null;
+	isAuthenticated: boolean;
+	user: User | null;
+	client: Client | null;
 }
 
 export const AuthContext = createContext<Auth | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 
-  const userStore = useUserStore(); // Access the global user store
-  const clientStore = useClientStore(); // Access the global client store
-  const clientAuthStore = useClientAuthStore(); // Access the global client auth store
+	const userStore = useUserStore(); // Access the global user store
+	const clientStore = useClientStore(); // Access the global client store
+	const clientAuthStore = useClientAuthStore(); // Access the global client auth store
 
-  useEffect(() => {
-    setLoading(true);
+	useEffect(() => {
+		setLoading(true);
 
-    getUser().then((user) => {
-      if (user) {
-        clientAuthStore.setAuthenticated("authenticated");
-        userStore.setUser(user);
-        getClientAccount({ user_id: user.id }).then((client) => {
-          if (client) {
-            clientStore.setClient(client);
-          } else {
-            console.error("No client found for user!");
-          }
-        });
-      } else {
-        clientAuthStore.setAuthenticated("unauthenticated");
-      }
-    });
+		getUser().then((user) => {
+			if (user) {
+				clientAuthStore.setAuthenticated('authenticated');
+				userStore.setUser(user);
+				getClientAccount({ user_id: user.id }).then((client) => {
+					if (client) {
+						clientStore.setClient(client);
+					} else {
+						console.error('No client found for user!');
+					}
+				});
+			} else {
+				clientAuthStore.setAuthenticated('unauthenticated');
+			}
+		});
 
-    const realtimeClient = supabase
-      .channel("clients")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "clients" },
-        (payload) => {
-          const data = payload as Payload; // Adding type support to payload
-          clientStore.setClient(data.new);
-        },
-      )
-      .subscribe();
+		const realtimeClient = supabase
+			.channel('clients')
+			.on(
+				'postgres_changes',
+				{ event: '*', schema: 'public', table: 'clients' },
+				(payload) => {
+					const data = payload as Payload; // Adding type support to payload
+					clientStore.setClient(data.new);
+				}
+			)
+			.subscribe();
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      const user = session?.user ?? null;
-      if (user) {
-        clientAuthStore.setAuthenticated("authenticated");
-        userStore.setUser(user); // Set or unset the user in the global store
-      } else {
-        clientAuthStore.setAuthenticated("unauthenticated");
-      }
-    });
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((event, session) => {
+			const user = session?.user ?? null;
+			if (user) {
+				clientAuthStore.setAuthenticated('authenticated');
+				userStore.setUser(user); // Set or unset the user in the global store
+			} else {
+				clientAuthStore.setAuthenticated('unauthenticated');
+			}
 
-    setLoading(false);
+			if (event === 'SIGNED_IN') {
+				notifications.show({
+					message: 'You have successfully signed in!',
+					autoClose: 3000,
+					color: 'violet',
+				});
+			}
+		});
 
-    return () => {
-      subscription.unsubscribe();
-      realtimeClient.unsubscribe();
-    };
-  }, []);
+		setLoading(false);
 
-  if (loading) {
-    return <LoadSpinner />;
-  }
+		return () => {
+			subscription.unsubscribe();
+			realtimeClient.unsubscribe();
+		};
+	}, []);
 
-  const authObject = {
-    isAuthenticated: clientAuthStore.isAuthenticated(),
-    user: userStore.getUser(),
-    client: clientStore.getClient(),
-  };
+	if (loading) {
+		return <LoadSpinner />;
+	}
 
-  return (
-    <AuthContext.Provider value={authObject}>{children}</AuthContext.Provider>
-  );
+	const authObject = {
+		isAuthenticated: clientAuthStore.isAuthenticated(),
+		user: userStore.getUser(),
+		client: clientStore.getClient(),
+	};
+
+	return (
+		<AuthContext.Provider value={authObject}>{children}</AuthContext.Provider>
+	);
 };
