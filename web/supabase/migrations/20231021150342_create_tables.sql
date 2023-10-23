@@ -16,6 +16,7 @@ CREATE TYPE public.LogLevels AS ENUM (
     'Trace'
 );
 
+-- Create custom ProjectMemberPrivileges type
 CREATE TYPE public.ProjectMemberPrivileges AS ENUM (
     'Read',
     'Write',
