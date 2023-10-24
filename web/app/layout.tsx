@@ -1,5 +1,5 @@
-import '@mantine/core/styles.css';
-import './globals.css'
+import "@mantine/core/styles.css";
+import "./globals.css";
 
 import React from "react";
 import type { Metadata } from "next";
@@ -12,24 +12,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: {
+  children,
+}: {
   children: React.ReactNode;
 }) {
   return (
-      <html lang="en">
+    <html lang="en">
       <head>
         <ColorSchemeScript />
         <link
-            href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
-            rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
+          rel="stylesheet"
         />
       </head>
       <body>
-      <MantineClientProvider>
-        {children}
-      </MantineClientProvider>
+        <MantineClientProvider>{children}</MantineClientProvider>
       </body>
-      </html>
+    </html>
   );
 }

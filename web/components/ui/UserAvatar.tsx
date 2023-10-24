@@ -1,21 +1,21 @@
 import React, { FC } from "react";
 import { Avatar } from "@mantine/core";
-import Link from "next/link"
+import Link from "next/link";
 // import useMetadata from "../../hooks/useMetadata";
 
 interface UserAvatarProps {}
 
 const UserAvatar: FC<UserAvatarProps> = ({}) => {
-    // const { avatar_url } = useMetadata();
+  // const { avatar_url } = useMetadata();
 
-    return (
-        <Avatar
-            src={null}
-            alt="User Avatar"
-            component={Link}
-            href={"/dashboard/settings"}
-        />
-    );
+  return (
+    <Avatar
+      src={null}
+      alt="User Avatar"
+      component={Link}
+      href={"/dashboard/settings"}
+    />
+  );
 };
 
 export default UserAvatar;

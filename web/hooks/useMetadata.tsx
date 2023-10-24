@@ -1,28 +1,28 @@
-import {createClient} from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 /** UserMeta Taken from consoling the object */
 type GoogleMetadata = {
-    avatar_url: string;
-    email: string;
-    email_verified: boolean;
-    full_name: string;
-    iss: string;
-    name: string;
-    picture: string;
-    provider_id: string;
-    sub: string;
+  avatar_url: string;
+  email: string;
+  email_verified: boolean;
+  full_name: string;
+  iss: string;
+  name: string;
+  picture: string;
+  provider_id: string;
+  sub: string;
 };
 
 /** UserMeta Taken from consoling the object */
 type GithubMetadata = {
-    avatar_url: string;
-    email: string;
-    email_verified: boolean;
-    iss: string;
-    preferred_username?: string;
-    provider_id: string;
-    sub: string;
-    user_name: string;
+  avatar_url: string;
+  email: string;
+  email_verified: boolean;
+  iss: string;
+  preferred_username?: string;
+  provider_id: string;
+  sub: string;
+  user_name: string;
 };
 
 /**
@@ -34,21 +34,21 @@ type GithubMetadata = {
  * Supported providers: Github and Google for now.
  */
 export default () => {
-    const supabase = createClient();
-    const auth = supabase.auth.getUser()
+  const supabase = createClient();
+  const auth = supabase.auth.getUser();
 
-    // const provider = auth?.user?.app_metadata.provider as "github" | "google";
+  // const provider = auth?.user?.app_metadata.provider as "github" | "google";
 
-    // switch (provider) {
-    //     case "github":
-    //         // todo
-    //     case "google":
-    //         // todo
-    //     default:
-    //         return {
-    //             email: "",
-    //             avatar_url: "",
-    //             username: "",
-    //         };
-    // }
+  // switch (provider) {
+  //     case "github":
+  //         // todo
+  //     case "google":
+  //         // todo
+  //     default:
+  //         return {
+  //             email: "",
+  //             avatar_url: "",
+  //             username: "",
+  //         };
+  // }
 };
