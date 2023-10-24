@@ -30,3 +30,4 @@ pnpm supabase db push --password <password>
 
 - [Current Issues](./issues.md)
 - [Todo List](./todo.md)
+- [Tech Stack](./stack.md)
