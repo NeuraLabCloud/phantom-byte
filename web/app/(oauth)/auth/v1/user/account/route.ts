@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json() as Body
 
     if(!body.user_id) {
-        return NextResponse.json({ error: "Missing user_id in fequest body!"}, { status: 400 })
+        return NextResponse.json({ error: "Missing user_id in POST request body!"}, { status: 400 })
     }
 
     let { data: client, error } = await supabaseRouteClient.from("clients")

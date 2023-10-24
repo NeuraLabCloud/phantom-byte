@@ -14,14 +14,12 @@ const Component: FC<ComponentProps> = ({}) => {
     const clientAuthStore = useClientAuthStore();
 
     const handleLogout = () => {
+        setLogoutTriggered(true);
         notifications.show({
             message: "You have been logged out.",
             color: "violet",
             autoClose: 3000,
         });
-        setTimeout(() => {
-            setLogoutTriggered(true);
-        }, 500);
     };
 
     useEffect(() => {
@@ -41,7 +39,7 @@ const Component: FC<ComponentProps> = ({}) => {
                 >
                     <Text className="text-white">Home</Text>
                 </Button>
-                <form action="/auth/signout" method="post">
+                <form action="/auth/signout" method="post" onSubmit={handleLogout}>
                     <Button variant="outline" type="submit">
                         <Text className="text-white">Sign out</Text>
                     </Button>

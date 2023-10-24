@@ -7,7 +7,9 @@ import Link from "next/link";
 import Particles from "@/components/ui/particles/Particles";
 
 export default function Home() {
-  const auth = useAuth()?.isAuthenticated;
+  const auth = useAuth();
+
+  console.log("auth", auth);
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function Home() {
               className="mt-5 animate-pulse"
             >
               <Text className="text-white">
-                {auth ? "Dashboard" : "Get Started"}
+                {auth?.isAuthenticated === "authenticated" ? "Dashboard" : "Get Started"}
               </Text>
             </Button>
           </Center>

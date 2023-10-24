@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Client } from "../types";
+import { AuthState, Client } from "../types";
 
 type ClientStore = {
   client: Client | null;
@@ -8,11 +8,10 @@ type ClientStore = {
   getClient: () => Client | null;
 };
 
-type AuthStatus = "authenticated" | "unauthenticated" | "loading";
 type ClientAuthStore = {
-  status: AuthStatus;
-  setAuthenticated: (status: AuthStatus) => void;
-  isAuthenticated: () => boolean;
+	status: AuthState;
+	setAuthenticated: (status: AuthState) => void;
+	isAuthenticated: () => AuthState;
 };
 
 /**
@@ -48,17 +47,7 @@ export const useClientStore = create<ClientStore>((set, get) => ({
 export const useClientAuthStore = create<ClientAuthStore>((set, get) => ({
   status: "unauthenticated",
   setAuthenticated: (status) => {
-    localStorageAuthCache.set(status);
     set({ status });
   },
-  isAuthenticated: () => get().status === "authenticated",
+  isAuthenticated: () => get().status
 }));
-
-/** A workaround to use our client side auth cache outside of hooks. */
-export const localStorageAuthCache = {
-  set: (status: AuthStatus) => localStorage.setItem("authStatus", status),
-  get: (): AuthStatus => localStorage.getItem("authStatus") as AuthStatus,
-  clear: () => localStorage.removeItem("authStatus"),
-  isAuthenticated: (): boolean =>
-    localStorage.getItem("authStatus") === "authenticated",
-};

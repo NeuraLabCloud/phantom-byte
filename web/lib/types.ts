@@ -16,3 +16,5 @@ export type Payload = {
   };
   errors: null | any;
 };
+
+export type AuthState = 'authenticated' | 'unauthenticated' | 'loading';
