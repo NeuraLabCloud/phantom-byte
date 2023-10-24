@@ -1,5 +1,4 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/route';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -9,13 +8,8 @@ export async function GET(request: Request) {
 	const requestUrl = new URL(request.url);
 	const code = requestUrl.searchParams.get('code');
 
-	console.log('code', code);
-
 	if (code) {
-		const cookieStore = cookies();
-		const supabase = createRouteHandlerClient({
-			cookies: () => cookieStore,
-		});
+		const supabase = createClient();
 		await supabase.auth.exchangeCodeForSession(code);
 	} else {
 		// If no code is present, this is an unexpected state. Redirect to the homepage.

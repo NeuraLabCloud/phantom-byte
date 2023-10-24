@@ -7,8 +7,9 @@ import { ColorSchemeScript } from "@mantine/core";
 import MantineClientProvider from "@/components/providers/MantineClientProvider";
 
 export const metadata: Metadata = {
-  title: "PhantomByte",
-  description: "Cloud Based Logging Service for Modern Software Applications",
+	title: 'PhantomByte',
+	description: 'Cloud Based Logging Service for Modern Software Applications',
+	icons: ['vercel.svg'],
 };
 
 export default function RootLayout({

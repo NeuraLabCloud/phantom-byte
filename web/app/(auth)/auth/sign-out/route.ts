@@ -1,18 +1,19 @@
-import { createClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { createClient } from '@/lib/supabase/route';
+import { NextResponse } from 'next/server';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
-  const requestUrl = new URL(request.url);
-  const supabase = createClient();
+	const requestUrl = new URL(request.url);
 
-  await supabase.auth.signOut({
-    scope: "local",
-  });
+  const supabase = createClient()
 
-  return NextResponse.redirect(`${requestUrl.origin}/`, {
-    // a 301 status is required to redirect from a POST to a GET route
-    status: 301,
-  });
+	await supabase.auth.signOut({
+		scope: 'local',
+	});
+
+	return NextResponse.redirect(`${requestUrl.origin}/`, {
+		// a 301 status is required to redirect from a POST to a GET route
+		status: 301,
+	});
 }
