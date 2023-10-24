@@ -13,8 +13,8 @@ export default function Login() {
   const supabase = createClient();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRedirectTo(`${window.location.origin}/auth/callback`);
+    if (typeof location !== "undefined") {
+      setRedirectTo(`${location.origin}/auth/callback`);
     }
   }, []);
 
