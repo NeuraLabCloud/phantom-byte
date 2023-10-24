@@ -1,15 +1,10 @@
-// Library imports
+import '@mantine/core/styles.css';
+import './globals.css'
+
 import React from "react";
 import type { Metadata } from "next";
 import { ColorSchemeScript } from "@mantine/core";
-
-// Style imports
-import "@mantine/core/styles.css";
-import "../styles/globals.css";
-
-// Component imports
 import MantineClientProvider from "@/components/providers/MantineClientProvider";
-import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "PhantomByte",
@@ -17,24 +12,24 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+      <html lang="en">
       <head>
         <ColorSchemeScript />
         <link
-          href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
-          rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
+            rel="stylesheet"
         />
       </head>
       <body>
-        <MantineClientProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </MantineClientProvider>
+      <MantineClientProvider>
+        {children}
+      </MantineClientProvider>
       </body>
-    </html>
+      </html>
   );
 }

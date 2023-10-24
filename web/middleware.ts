@@ -2,37 +2,27 @@ import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
-import {supabaseConfig} from "@/lib/supabase";
 
 export async function middleware(req: NextRequest) {
-    const res = NextResponse.next()
+  const res = NextResponse.next()
+  const supabase = createMiddlewareClient({ req, res })
 
-    const supabase = createMiddlewareClient({ req, res }, {
-        supabaseUrl: supabaseConfig.supabaseUrl,
-        supabaseKey: supabaseConfig.supabaseUrl
-    })
+  const {data: { session}} =await supabase.auth.getSession()
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+  const path = req.nextUrl.pathname
 
-    // if user is signed in and the current path is / redirect the user to /dashboard
-    if (user && req.nextUrl.pathname === '/login') {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
+  if(!session && path === "/dashboard") return NextResponse.redirect(new URL("/login", req.url), { status: 302, statusText: "Unauthorized" })
+  if(!session && path === "/logout") return NextResponse.redirect(new URL("/login", req.url), { statusText: "Unauthorized", status: 302 })
+  if(session && path === "/login") return NextResponse.redirect(new URL("/dashboard", req.url), { statusText: "Authorized", status: 302 })
 
-    // if user is not signed in and the current path is /dashboard redirect the user to /login
-    if (!user && req.nextUrl.pathname === '/dashboard') {
-        return NextResponse.redirect(new URL('/login', req.url))
-    }
-
-    return res
+  return res
 }
 
 export const config = {
-    matcher: [
-        '/logout',
-        '/dashboard:path*',
-        "/auth:path*"
-    ]
+  matcher: [
+    '/logout',
+    '/dashboard:path*',
+    "/auth:path*",
+    "/api:path*",
+  ]
 }
