@@ -4,7 +4,7 @@ import LoadingSpinner from "@/components/ui/loading/LoadingSpinner";
 interface ComponentProps {}
 
 const Component: FC<ComponentProps> = async ({}) => {
-  return <LoadingSpinner />;
+    return <LoadingSpinner />;
 };
 
 export default Component;
