@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import '@mantine/code-highlight/styles.css';
 import "../styles/global.css";
 
 import React from "react";
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true} suppressContentEditableWarning={true}>
       <head>
         <ColorSchemeScript />
         <link
