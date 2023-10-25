@@ -13,5 +13,5 @@
 - [Node.js](https://nodejs.org/en/)
 - [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
 - [Supabase](https://supabase.com/)
-- [PostgreSQL](https://www.postgresql.org/)
+- [PostgresSQL](https://www.postgresql.org/)
 - [Redis](https://redis.io/)
