@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import HomeComponent from "@/components/page-ui/HomeComponent";
-import {trpc} from "@/lib/trpc/serverClient";
 
 export const dynamic = "force-dynamic";
 
