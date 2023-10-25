@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import "./globals.css";
+import "../styles/global.css";
 
 import React from "react";
 import type { Metadata } from "next";
@@ -9,7 +9,7 @@ import MantineClientProvider from "@/components/providers/MantineClientProvider"
 export const metadata: Metadata = {
 	title: 'PhantomByte',
 	description: 'Cloud Based Logging Service for Modern Software Applications',
-	icons: ['vercel.svg'],
+	icons: ['favicon.ico'],
 };
 
 export default function RootLayout({
