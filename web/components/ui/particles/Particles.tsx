@@ -8,7 +8,7 @@ const Particles: FC<ParticlesProps> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Get the canvas and its context
+    // Get the canvas and its context.ts
     const canvas = canvasRef.current;
     if (!canvas) return;
 
