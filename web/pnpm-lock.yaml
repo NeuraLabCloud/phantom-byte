@@ -44,6 +44,12 @@ dependencies:
   '@tabler/icons-react':
     specifier: ^2.39.0
     version: 2.39.0(react@18.2.0)
+  '@trpc/client':
+    specifier: ^10.42.0
+    version: 10.42.0(@trpc/server@10.42.0)
+  '@trpc/server':
+    specifier: ^10.42.0
+    version: 10.42.0
   autoprefixer:
     specifier: 10.4.16
     version: 10.4.16(postcss@8.4.31)
@@ -521,6 +527,18 @@ packages:
 
   /@tabler/icons@2.39.0:
     resolution: {integrity: sha512-iK3j2jIEGIUaJcbYYg5iwyG1Y/m4lzUxAUbxRpvgeXCWP29jvZaH5hajZmU3KaSealddHuJg7PSQislPHpCsoQ==}
+    dev: false
+
+  /@trpc/client@10.42.0(@trpc/server@10.42.0):
+    resolution: {integrity: sha512-iHPBVUAvn4VTKE75KLZ2fUQL8wpRY5hiRLyRE8QhGUSDc/RW5Pym9wotryZqz47DHjs2J5Qd16MSGt3tNlclFA==}
+    peerDependencies:
+      '@trpc/server': 10.42.0
+    dependencies:
+      '@trpc/server': 10.42.0
+    dev: false
+
+  /@trpc/server@10.42.0:
+    resolution: {integrity: sha512-s0QuK72orW+pYce60sd4I36N3xJKzypS2k+8GJ7phH4KqO4XjBXezOFmGMcXTznsVqEiX5zs5ujLfQdJ9X3Y2g==}
     dev: false
 
   /@types/node@20.8.8:
