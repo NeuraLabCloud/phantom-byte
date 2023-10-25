@@ -6,7 +6,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { ColorSchemeScript } from "@mantine/core";
 import MantineClientProvider from "@/components/providers/MantineClientProvider";
-import RQProvider from "@/lib/trpc/RQProvider";
+import RQProvider from "@/lib/trpc/client/RQProvider";
 
 export const metadata: Metadata = {
 	title: 'PhantomByte',

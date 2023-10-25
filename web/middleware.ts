@@ -33,5 +33,9 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/logout", "/dashboard:path*", "/auth:path*", "/api:path*"],
+	matcher: [
+		'/((?!.+\\.[\\w]+$|_next).*)',
+		'/',
+		'/(api|trpc|dashboard|auth)(.*)',
+	],
 };
