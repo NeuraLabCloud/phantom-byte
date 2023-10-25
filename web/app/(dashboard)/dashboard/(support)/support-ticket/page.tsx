@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> = async ({}) => {
    return (
        <>
-           <div>Settings Page</div>
+           <div>Support Ticket</div>
        </>
    )
 }

@@ -1,3 +1,4 @@
+import { AppShellBuilder } from "@/components/ui/AppShell";
 import React, { FC } from "react";
 
 interface DashboardLayoutProps {
@@ -5,7 +6,11 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = async ({ children }) => {
-  return <>{children}</>;
+  return (
+			<>
+				<AppShellBuilder>{children}</AppShellBuilder>
+			</>
+		);
 };
 
 export default DashboardLayout;

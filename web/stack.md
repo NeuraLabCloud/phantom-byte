@@ -7,7 +7,6 @@
 - [TailwindCSS](https://tailwindcss.com/)
 - [Mantine](https://mantine.dev/)
 - [Apex Charts](https://apexcharts.com/)
-- [ShadUI](https://ui.shadcn.com/)
 
 ## Backend
 
