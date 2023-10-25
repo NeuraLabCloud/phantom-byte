@@ -3,6 +3,7 @@
 import React, { FC } from 'react'
 import { Table, NavLink, Anchor } from '@mantine/core'
 import { IconHome2 } from '@tabler/icons-react';
+import Link from 'next/link';
 
 const logProjects = [
     {
@@ -89,6 +90,7 @@ const logProjects = [
 
 
 interface pageProps { }
+
 const page: FC<pageProps> = async ({ }) => {
     const rows = logProjects.map((project) => (
         <Table.Tr key={project.title}>
@@ -98,7 +100,7 @@ const page: FC<pageProps> = async ({ }) => {
             <Table.Td>{project.teamMembers}</Table.Td> */}
             <Table.Td>{project.duration}</Table.Td>
             <Table.Td>
-                <Anchor href={`/dashboard/projects/${project.id}`} target="_blank">
+                <Anchor href={`/dashboard/projects/${project.id}`} component={Link}>
                     Inspect
                 </Anchor>
             </Table.Td>
