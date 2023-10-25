@@ -30,8 +30,8 @@ const tabs = {
 	general: [
 		{ link: '', label: 'Dashboard', icon: IconDashboard },
 		{ link: '/notifications', label: 'Notifications', icon: IconBellRinging },
-		{ link: '/billing', label: 'Billing', icon: IconReceipt2 },
 		{ link: '/projects', label: 'Projects', icon: IconDatabaseCog },
+		{ link: '/billing', label: 'Billing', icon: IconReceipt2 },
 		{ link: '/settings', label: 'Account Settings', icon: IconSettings },
 	],
 	support: [

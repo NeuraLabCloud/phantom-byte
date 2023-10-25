@@ -1,8 +1,7 @@
 "use client"
 
-import { useRouter } from 'next/navigation'
 import React, { FC } from 'react'
-import { Table, NavLink, Anchor } from '@mantine/core'
+import { Table } from '@mantine/core'
 
 const projectLogs = [
 	{
@@ -58,8 +57,9 @@ interface pageProps { params: { id: string } }
 const page: FC<pageProps> = async ({ params }) => {
 
 	const rows = projectLogs.map((logItem) => (
-		<Table.Tr key={logItem.severity}>
-			{columns.map((columnKey) => {
+		<Table.Tr key={logItem.id}>
+			{columns.map((columnKey: string) => {
+				//@ts-ignore
 				return <Table.Td>{logItem[columnKey]}</Table.Td>
 			})}
 		</Table.Tr>
