@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@mantine/code-highlight':
+    specifier: ^7.1.5
+    version: 7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0)
   '@mantine/core':
     specifier: ^7.1.5
     version: 7.1.5(@mantine/hooks@7.1.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
+  '@mantine/ds':
+    specifier: ^7.1.5
+    version: 7.1.5(@mantine/code-highlight@7.1.5)(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(@tabler/icons-react@2.39.0)(react-dom@18.2.0)(react@18.2.0)
   '@mantine/form':
     specifier: ^7.1.5
     version: 7.1.5(react@18.2.0)
@@ -174,6 +180,22 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: false
 
+  /@mantine/code-highlight@7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TDjA/TZJlG/fMoSCrjaQTKWinYbXBjhA1Hxg0Rwv1Vzy3vdG3FeHcPl3vUVBVIHW6hJY7qH6QH7bU3wv3J2PzQ==}
+    peerDependencies:
+      '@mantine/core': 7.1.5
+      '@mantine/hooks': 7.1.5
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@mantine/core': 7.1.5(@mantine/hooks@7.1.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 7.1.5(react@18.2.0)
+      clsx: 2.0.0
+      highlight.js: 11.9.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@mantine/core@7.1.5(@mantine/hooks@7.1.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-4jBuy26V4Wdrt7r2dT6d3SKSyU9Gfzxp0ycVTBd2FUb6PvsI/xyZIn8T/aHsJFQ1L5p7IHPcJCIThbmBpVvVtA==}
     peerDependencies:
@@ -192,6 +214,25 @@ packages:
       type-fest: 3.13.1
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@mantine/ds@7.1.5(@mantine/code-highlight@7.1.5)(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(@tabler/icons-react@2.39.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-7MdGHZ8qmI/sfBB4W27NtouOO5np7dlAzyl3MuSgALWdaeWbgBO6Ig3+DB4ADbhh+dBIQVN7tHqUIQ6oYV2xDQ==}
+    peerDependencies:
+      '@mantine/code-highlight': 7.1.5
+      '@mantine/core': 7.1.5
+      '@mantine/hooks': 7.1.5
+      '@tabler/icons-react': ^2.29.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@mantine/code-highlight': 7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/core': 7.1.5(@mantine/hooks@7.1.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 7.1.5(react@18.2.0)
+      '@tabler/icons-react': 2.39.0(react@18.2.0)
+      clsx: 2.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@mantine/form@7.1.5(react@18.2.0):
@@ -897,6 +938,11 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: false
+
+  /highlight.js@11.9.0:
+    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /https-proxy-agent@7.0.2:

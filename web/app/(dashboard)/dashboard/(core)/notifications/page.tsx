@@ -5,7 +5,7 @@ interface pageProps {}
 const page: FC<pageProps> = async ({}) => {
 	return (
 		<>
-			<div>Settings Page</div>
+			<div>Notifications</div>
 		</>
 	);
 };

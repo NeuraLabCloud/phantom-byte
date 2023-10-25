@@ -4,9 +4,9 @@ interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
    return (
-	   <>
-		   <div>Project ID Page</div>
-	   </>
+       <>
+           <div>Projects</div>
+       </>
    )
 }
 
