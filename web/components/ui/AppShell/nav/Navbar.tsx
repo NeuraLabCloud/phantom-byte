@@ -48,9 +48,9 @@ const Navbar: FC<NavbarProps> = ({}) => {
 	const [active, setActive] = useState('Dashboard');
 
 	const idle = useIdle(5000);
-	const router = useRouter();
-	const pathName = usePathname();
-	const query = useSearchParams();
+	// const router = useRouter();
+	// const pathName = usePathname();
+	// const query = useSearchParams();
 
 	const links = tabs[section].map((item) => (
 		<Link
@@ -69,28 +69,28 @@ const Navbar: FC<NavbarProps> = ({}) => {
 		</Link>
 	));
 
-	useEffect(() => {
-		const sectionFromQuery = query.get('section');
-		const activeFromQuery = query.get('active');
+	// useEffect(() => {
+	// 	const sectionFromQuery = query.get('section');
+	// 	const activeFromQuery = query.get('active');
 
-		if (
-			sectionFromQuery &&
-			(sectionFromQuery === 'general' || sectionFromQuery === 'support')
-		) {
-			setSection(sectionFromQuery);
-		}
-		if (activeFromQuery) {
-			setActive(
-				activeFromQuery.charAt(0).toUpperCase() + activeFromQuery.slice(1)
-			);
-		}
-	}, [query]);
+	// 	if (
+	// 		sectionFromQuery &&
+	// 		(sectionFromQuery === 'general' || sectionFromQuery === 'support')
+	// 	) {
+	// 		setSection(sectionFromQuery);
+	// 	}
+	// 	if (activeFromQuery) {
+	// 		setActive(
+	// 			activeFromQuery.charAt(0).toUpperCase() + activeFromQuery.slice(1)
+	// 		);
+	// 	}
+	// }, [query]);
 
-	useEffect(() => {
-		if (!query.get('section')) {
-			router.push(`${pathName}?section=${section}&active=${active.toLowerCase()}`);
-		}
-	}, [section, pathName, active]);
+	// useEffect(() => {
+	// 	if (!query.get('section')) {
+	// 		router.push(`${pathName}?section=${section}&active=${active.toLowerCase()}`);
+	// 	}
+	// }, [section, pathName, active]);
 
 	return (
 		<nav>
@@ -120,9 +120,9 @@ const Navbar: FC<NavbarProps> = ({}) => {
 					onChange={(value: 'account' | 'general') => {
 						//@ts-expect-error
 						setSection(value);
-						router.push(
-							`${pathName}?section=${section}?active=${active.toLocaleLowerCase()}`
-						);
+						// router.push(
+						// 	`${pathName}?section=${section}?active=${active.toLocaleLowerCase()}`
+						// );
 					}}
 					transitionTimingFunction='ease'
 					fullWidth

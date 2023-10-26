@@ -33,6 +33,7 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 export const middleware = t.middleware;
 
+/** Incoming request must have a session or else throw an error */
 export const protectedProcedure = publicProcedure.use((opts) => {
 	const { session } = opts.ctx;
 
