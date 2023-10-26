@@ -31,9 +31,9 @@ export const AppShellBuilder: FC<indexProps> = async ({ children }) => {
 					hiddenFrom='sm'
 					size='sm'
 				/>
-				<Center>
+				{/* <Center>
 					<Text>PhantomByte Dashboard</Text>
-				</Center>
+				</Center> */}
 			</AppShell.Header>
 			<AppShell.Navbar p='md'>
 				<Navbar />

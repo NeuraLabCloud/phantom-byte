@@ -40,7 +40,7 @@ export const protectedProcedure = publicProcedure.use((opts) => {
 	if (!session?.user) {
 		throw new TRPCError({
 			code: 'UNAUTHORIZED',
-            cause: new Error('No session user found'),
+			message: 'No session user found',
 		});
 	}
 
@@ -53,14 +53,14 @@ const isAdmin = middleware(async (opts) => {
 	if (!ctx.session.client) {
 		throw new TRPCError({
 			code: 'UNAUTHORIZED',
-			cause: new Error('No session client found'),
+			message: 'No session client found',
 		});
 	}
 
 	if (ctx.session.client?.role !== 'Admin') {
 		throw new TRPCError({
 			code: 'UNAUTHORIZED',
-			cause: new Error('Missing Admin Permissions'),
+			message: 'Missing Admin Permissions',
 		});
 	}
 

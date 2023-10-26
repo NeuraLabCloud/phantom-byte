@@ -34,7 +34,7 @@ const ProjectListTable: FC<ProjectListTableProps> = async ({ projects }) => {
 				captionSide='bottom'
 				striped={false}
 				highlightOnHover={true}
-				withTableBorder={true}
+				withTableBorder={false}
 				withRowBorders={false}>
 				<Table.Caption>Logs Projects List</Table.Caption>
 				<Table.Thead>

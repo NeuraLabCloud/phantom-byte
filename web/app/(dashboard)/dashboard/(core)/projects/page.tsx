@@ -1,6 +1,7 @@
-import ProjectListTable from '@/components/page-ui/ProjectListTable'
-import { trpc } from '@/lib/trpc/server/client'
-import React, { FC } from 'react'
+import Cards from '@/components/ui/Cards';
+import { trpc } from '@/lib/trpc/server/client';
+import { getBaseUrl } from '@/lib/trpc/shared';
+import React, { FC } from 'react';
 
 // needed to avoid https://nextjs.org/docs/messages/dynamic-server-error error on build
 export const dynamic = 'force-dynamic';
@@ -8,9 +9,24 @@ export const dynamic = 'force-dynamic';
 interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
-   const projects = await trpc.getClientProjects.query()
-   
-   return <ProjectListTable projects={projects} />;
-}
+	const projects = await trpc.projects.list.query();
 
-export default page
+	return (
+		<>
+			{projects.map((project, index) => (
+				<div key={index}>
+					<Cards
+						title={project.name}
+						description={project.description}
+						link={`${getBaseUrl()}/dashboard/projects/${project.id}`}
+						color='violet'
+						btnText='View Project'
+						underConstruction={false}
+					/>
+				</div>
+			))}
+		</>
+	);
+};
+
+export default page;
