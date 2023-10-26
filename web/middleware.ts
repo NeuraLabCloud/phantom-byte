@@ -32,12 +32,5 @@ export async function middleware(req: NextRequest) {
     });
   }
 
-  if (!session) {
-    return NextResponse.redirect(new URL("/", req.url), {
-      statusText: "Unauthorized",
-      status: 302,
-    });
-  }
-
   return res;
 }
