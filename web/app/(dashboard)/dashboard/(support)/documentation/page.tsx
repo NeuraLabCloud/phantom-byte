@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { CodeHighlight } from '@mantine/code-highlight';
+import React, { FC } from "react";
+import { CodeHighlight } from "@mantine/code-highlight";
 
 const exampleCode = `
 use actix_web::{get, web::ServiceConfig};
@@ -24,12 +24,7 @@ async fn actix_web(
 interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
-	return (
-		<CodeHighlight
-			code={exampleCode}
-			language='rust'
-		/>
-	);
+  return <CodeHighlight code={exampleCode} language="rust" />;
 };
 
 export default page;

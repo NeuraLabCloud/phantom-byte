@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import '@mantine/code-highlight/styles.css';
+import "@mantine/code-highlight/styles.css";
 import "../styles/global.css";
 
 import React from "react";
@@ -9,9 +9,9 @@ import MantineClientProvider from "@/components/providers/MantineClientProvider"
 import RQProvider from "@/lib/trpc/client/RQProvider";
 
 export const metadata: Metadata = {
-	title: 'PhantomByte',
-	description: 'Cloud Based Logging Service for Modern Software Applications',
-	icons: ['favicon.ico'],
+  title: "PhantomByte",
+  description: "Cloud Based Logging Service for Modern Software Applications",
+  icons: ["favicon.ico"],
 };
 
 export default function RootLayout({
@@ -20,7 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true} suppressContentEditableWarning={true}>
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+      suppressContentEditableWarning={true}
+    >
       <head>
         <ColorSchemeScript />
         <link
@@ -30,9 +34,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineClientProvider>
-            <RQProvider>
-                {children}
-            </RQProvider>
+          <RQProvider>{children}</RQProvider>
         </MantineClientProvider>
       </body>
     </html>

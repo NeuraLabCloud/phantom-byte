@@ -1,6 +1,6 @@
-import { createClient } from '@/lib/supabase/route';
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
-import { Session } from '@supabase/auth-helpers-nextjs';
+import { createClient } from "@/lib/supabase/route";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { Session } from "@supabase/auth-helpers-nextjs";
 
 /**
  * Defines your inner context shape.
@@ -20,9 +20,9 @@ interface CreateInnerContextOptions extends Partial<CreateNextContextOptions> {
  * @see https://trpc.io/docs/context#inner-and-outer-context
  */
 export async function createContextInner(opts?: CreateInnerContextOptions) {
-	return {
-		supabase: createClient(),
-	};
+  return {
+    supabase: createClient(),
+  };
 }
 
 /**
@@ -31,29 +31,29 @@ export async function createContextInner(opts?: CreateInnerContextOptions) {
  * @see https://trpc.io/docs/context#inner-and-outer-context
  */
 export async function createContext(opts?: CreateNextContextOptions) {
-	const contextInner = await createContextInner();
+  const contextInner = await createContextInner();
 
-	const { data } = await contextInner.supabase.auth.getSession();
+  const { data } = await contextInner.supabase.auth.getSession();
 
-	const clientData = await contextInner.supabase
-		.from('clients')
-		.select('*')
-		.eq('user_id', data.session?.user?.id ?? '')
-		.single();
+  const clientData = await contextInner.supabase
+    .from("clients")
+    .select("*")
+    .eq("user_id", data.session?.user?.id ?? "")
+    .single();
 
-	const session = {
-		...data.session,
-		client: clientData.data,
-	};
+  const session = {
+    ...data.session,
+    client: clientData.data,
+  };
 
-	return {
-		...contextInner,
-		session,
-		headers: opts?.req.headers,
-		cookies: opts?.req.cookies,
-		req: opts?.req,
-		res: opts?.res,
-	};
+  return {
+    ...contextInner,
+    session,
+    headers: opts?.req.headers,
+    cookies: opts?.req.cookies,
+    req: opts?.req,
+    res: opts?.res,
+  };
 }
 
 export type Context = Awaited<ReturnType<typeof createContext>>;

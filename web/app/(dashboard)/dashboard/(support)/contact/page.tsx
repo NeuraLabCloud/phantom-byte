@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 
 interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
-   return (
-       <>
-           <div>Contact</div>
-       </>
-   )
-}
+  return (
+    <>
+      <div>Contact</div>
+    </>
+  );
+};
 
-export default page
+export default page;

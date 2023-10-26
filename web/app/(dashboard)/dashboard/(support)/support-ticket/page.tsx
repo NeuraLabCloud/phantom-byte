@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 
 interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
-   return (
-       <>
-           <div>Support Ticket</div>
-       </>
-   )
-}
+  return (
+    <>
+      <div>Support Ticket</div>
+    </>
+  );
+};
 
-export default page
+export default page;

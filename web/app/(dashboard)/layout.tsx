@@ -7,10 +7,10 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: FC<DashboardLayoutProps> = async ({ children }) => {
   return (
-			<>
-				<AppShellBuilder>{children}</AppShellBuilder>
-			</>
-		);
+    <>
+      <AppShellBuilder>{children}</AppShellBuilder>
+    </>
+  );
 };
 
 export default DashboardLayout;
