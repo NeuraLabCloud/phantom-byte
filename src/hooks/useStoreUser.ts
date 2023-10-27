@@ -10,8 +10,8 @@ import { api } from "../../convex/_generated/api";
 const useStoreUser = () => {
   const { isAuthenticated } = useConvexAuth();
   const { user } = useUser();
-  const [userId, setUserId] = useState<Id<"users"> | null>(null);
-  const storeUser = useMutation(api.users.store);
+  const [userId, setUserId] = useState<Id<'auth'> | null>(null);
+  const storeUser = useMutation(api.auth.store);
 
   useEffect(() => {
     if (!isAuthenticated) {
