@@ -1,23 +1,26 @@
-import './globals.css'
+import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
+import './globals.css';
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], preload: true })
+const inter = Inter({ subsets: ['latin'], preload: true });
 
 export const metadata: Metadata = {
-  title: 'Talent Tree',
-  description: 'Find your next job in tech',
-}
+	title: 'Talent Tree | Freelancing',
+	description: 'Start Freelancing and Built your Career in Tech',
+};
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+	return (
+		<html lang='en' suppressHydrationWarning={true}>
+			<body className={inter.className}>
+				<ConvexClerkProvider>{children}</ConvexClerkProvider>
+			</body>
+		</html>
+	);
 }
