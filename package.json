@@ -19,6 +19,7 @@
     "@mantine/hooks": "^7.1.7",
     "@mantine/modals": "^7.1.7",
     "@mantine/notifications": "^7.1.7",
+    "@tabler/icons-react": "^2.40.0",
     "convex": "^1.5.1",
     "next": "14.0.0",
     "react": "^18",

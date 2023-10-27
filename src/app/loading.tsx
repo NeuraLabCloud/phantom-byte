@@ -1,15 +1,10 @@
-import { Loader } from '@mantine/core';
 import React, { FC } from 'react';
+import LoadingState from '@/components/ui/LoadingState';
 
 interface loadingProps {}
 
 const loading: FC<loadingProps> = async ({}) => {
-	return (
-		<Loader
-			size='xl'
-			type='dots'
-		/>
-	);
+	return <LoadingState />;
 };
 
 export default loading;
