@@ -13,6 +13,12 @@
   "dependencies": {
     "@clerk/clerk-react": "^4.27.1",
     "@clerk/nextjs": "^4.26.1",
+    "@mantine/code-highlight": "^7.1.7",
+    "@mantine/core": "^7.1.7",
+    "@mantine/form": "^7.1.7",
+    "@mantine/hooks": "^7.1.7",
+    "@mantine/modals": "^7.1.7",
+    "@mantine/notifications": "^7.1.7",
     "convex": "^1.5.1",
     "next": "14.0.0",
     "react": "^18",
@@ -25,7 +31,9 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "14.0.0",
-    "postcss": "^8",
+    "postcss": "^8.4.31",
+    "postcss-preset-mantine": "^1.9.0",
+    "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.0.3",
     "tailwindcss": "^3",
     "typescript": "^5"

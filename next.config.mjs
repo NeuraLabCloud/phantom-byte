@@ -6,7 +6,7 @@ const nextConfig = {
   },
   images: {},
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   distDir: ".next",
   cleanDistDir: true,
