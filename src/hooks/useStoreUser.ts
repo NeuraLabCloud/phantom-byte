@@ -7,7 +7,7 @@ import { useMutation } from "convex/react";
 import { Id } from "../../convex/_generated/dataModel";
 import { api } from "../../convex/_generated/api";
 
-export default () => {
+const useStoreUser = () => {
   const { isAuthenticated } = useConvexAuth();
   const { user } = useUser();
   const [userId, setUserId] = useState<Id<"users"> | null>(null);
@@ -27,3 +27,5 @@ export default () => {
 
   return userId;
 };
+
+export default useStoreUser;
