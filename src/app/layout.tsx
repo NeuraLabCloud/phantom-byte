@@ -7,27 +7,24 @@ import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
 import MantineClientProvider from '@/components/providers/MantineClientProvider';
 
 export const metadata: Metadata = {
-	title: 'Talent Tree | Freelancing for Developers',
-	description: 'Start Freelancing and Built your Career in Tech',
+	title: 'PhantomByte | Cloud Logging',
+	description: 'Cloud Based Logging Service for Modern Software Applications',
 	authors: [
-		{ name: 'Talent Tree', url: 'https://github.com/TalentTreeOSS' },
+		{ name: 'Talent Tree', url: 'https://github.com/PhantomByteCloud' },
 		{ name: 'ThatGuyJamal', url: 'https://github.com/ThatGuyJamal' },
 	],
 	keywords: [
-		'freelance',
-		'freelancing',
-		'freelancer',
-		'developer',
-		'tech',
-		'talent tree',
-		'jobs',
-		'career',
-		'remote',
-		'remote work',
-		'remote jobs',
+		"PhantomByte",
+		"PhantomByte Cloud",
+		"PhantomByte Cloud Logging",
+		"SAAS",
+		"Cloud Logging",
+		"Cloud Logging Service",
+		"Logging Service",
+		"Logging API",
 	],
 	referrer: 'strict-origin-when-cross-origin',
-	creator: 'Talent Tree Team',
+	creator: 'PhantomByte Team',
 	publisher: 'ThatGuyJamal',
 	robots: {
 		index: true, // Allow search engines to index the content
