@@ -1,8 +1,9 @@
-import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
 import './globals.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import ConvexUserProvider from '@/components/providers/ConvexUserProvider';
+import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
 
 const inter = Inter({ subsets: ['latin'], preload: true });
 
@@ -17,9 +18,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='en' suppressHydrationWarning={true}>
+		<html
+			lang='en'
+			suppressHydrationWarning={true}>
 			<body className={inter.className}>
-				<ConvexClerkProvider>{children}</ConvexClerkProvider>
+				<ConvexClerkProvider>
+					<ConvexUserProvider>{children}</ConvexUserProvider>
+				</ConvexClerkProvider>
 			</body>
 		</html>
 	);

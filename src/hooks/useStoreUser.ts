@@ -24,5 +24,6 @@ export default () => {
 		createUser();
 		return () => setUserId(null);
 	}, [isAuthenticated, storeUser, user?.id]);
+	
 	return userId;
 };

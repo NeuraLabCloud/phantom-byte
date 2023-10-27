@@ -7,33 +7,43 @@ export const store = mutation({
 		const identity = await ctx.auth.getUserIdentity();
 
 		if (!identity) {
-			throw new Error('Called storeUser without authentication present');
+			throw new Error('Not Authenticated');
 		}
-        
-		const user = await getUser(ctx, identity.nickname!);
+
+		if (!identity.email) {
+			throw new Error('No email address');
+		}
+
+		if (!identity.name) {
+			throw new Error('No email address');
+		}
+
+		console.log('identity', identity);
+
+		const user = await getUser(ctx, identity.email!);
+
+		const newUser = {
+			tokenIdentifier: identity.tokenIdentifier,
+			issuer: identity.issuer,
+			username: identity.nickname || identity.name,
+			clerkUserId: identity.subject,
+			email: identity.email,
+			emailVerified: identity.emailVerified ?? false,
+		};
 
 		if (user !== null) {
 			if (
-				user.name !== identity.name ||
 				user.username !== identity.nickname ||
-				user.pictureUrl !== identity.pictureUrl
+				identity.name ||
+				user.email !== identity.email
 			) {
-				await ctx.db.patch(user._id, {
-					name: identity.name,
-					username: identity.nickname,
-					pictureUrl: identity.pictureUrl,
-				});
+				await ctx.db.patch(user._id, newUser);
 			}
 			return user._id;
 		}
 
 		// If it's a new identity, create a new `User`.
-		return await ctx.db.insert('users', {
-			name: identity.name!,
-			username: identity.nickname!,
-			pictureUrl: identity.pictureUrl!,
-            email: identity.email!,
-		});
+		return await ctx.db.insert('users', newUser);
 	},
 });
 
