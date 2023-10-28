@@ -6,7 +6,7 @@ import { MantineProvider, createTheme } from '@mantine/core';
 const theme = createTheme({
 	fontFamily: 'Open Sans, sans-serif',
 	fontSmoothing: true,
-	primaryColor: 'red',
+	primaryColor: "violet",
 	primaryShade: 8,
 	defaultGradient: {
 		from: "red",

@@ -1,10 +1,12 @@
 import '@mantine/core/styles.css';
+import '@mantine/code-highlight/styles.css';
 import './globals.css';
 
 import type { Metadata } from 'next';
 import ConvexUserProvider from '@/components/providers/ConvexUserProvider';
 import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
 import MantineClientProvider from '@/components/providers/MantineClientProvider';
+import { ColorSchemeScript } from '@mantine/core';
 
 export const metadata: Metadata = {
 	title: 'PhantomByte | Cloud Logging',
@@ -52,6 +54,13 @@ export default function RootLayout({
 		<html
 			lang='en'
 			suppressHydrationWarning={true}>
+			<head>
+				<ColorSchemeScript />
+				<link
+					href='https://fonts.googleapis.com/css2?family=Nosifer&display=swap'
+					rel='stylesheet'
+				/>
+			</head>
 			<body>
 				<ConvexClerkProvider>
 					<ConvexUserProvider>
