@@ -12,3 +12,10 @@ export type ClerkUserIdentity = {
   phoneNumberVerified: boolean;
   updatedAt: string;
 };
+
+/**
+ * The user info props passed to the client side through the app shell.
+ */
+export type AppShellUserData = {
+  username: string
+}

@@ -1,5 +1,6 @@
 import { v } from 'convex/values';
 import { QueryCtx, mutation, query } from './_generated/server';
+import { IConvexError, isAuthenticated } from './_shared';
 
 /**
  * Stores an authenticated user in the database. This runs whenever the auth state is changed on the client side (by clerk).
@@ -10,38 +11,51 @@ import { QueryCtx, mutation, query } from './_generated/server';
 export const store = mutation({
 	args: {},
 	handler: async (ctx) => {
-		const identity = await ctx.auth.getUserIdentity();
-
-		if (!identity) {
-			throw new Error('Unauthorized');
-		}
+		const identity = await isAuthenticated(ctx.auth);
 
 		if (!identity.email) {
-			throw new Error('Unauthorized - No email address');
+			throw new IConvexError({
+				code: 'Unauthorized',
+				message: 'No email found for identity',
+			});
 		}
 
 		if (!identity.name) {
-			throw new Error('Unauthorized - no name');
+			throw new IConvexError({
+				code: 'Unauthorized',
+				message: 'No name found for identity',
+			});
 		}
 
-		const user = await getUser(ctx, identity.email!);
+		const user = await getUserWithId(ctx, identity.subject);
 
 		if (user !== null) {
 			if (
 				user.username !== identity.nickname ||
+				identity.preferredUsername ||
 				identity.name ||
+				identity.familyName ||
 				user.email !== identity.email
 			) {
 				const newUser = {
 					...user,
 					tokenIdentifier: identity.tokenIdentifier,
 					issuer: identity.issuer,
+					user_id: identity.subject,
 					username: identity.nickname || identity.name,
-					clerkUserId: identity.subject,
 					email: identity.email,
 					emailVerified: identity.emailVerified ?? false,
 				};
-				await ctx.db.patch(user._id, newUser);
+
+				await ctx.db.patch(user._id, newUser).catch((err) => {
+					console.error(err);
+					throw new IConvexError({
+						code: 'DatabaseError',
+						message: err.message,
+						severity: 'High',
+						where: 'convex/auth.ts',
+					});
+				});
 			}
 			return user._id;
 		}
@@ -51,25 +65,56 @@ export const store = mutation({
 			tokenIdentifier: identity.tokenIdentifier,
 			issuer: identity.issuer,
 			username: identity.nickname || identity.name,
-			clerkUserId: identity.subject,
+			user_id: identity.subject,
 			email: identity.email,
 			emailVerified: identity.emailVerified ?? false,
+			role: 'User',
+			tombstoned: false,
+			projects: [],
+			joined_projects: [],
 		});
 	},
 });
 
 export const get = query({
 	args: {
-		email: v.string(),
+		user_id: v.string(),
 	},
-	handler: async (ctx, args) => {
-		return await getUser(ctx, args.email);
+	handler: async (ctx, { user_id }) => {
+		return await getUserWithId(ctx, user_id);
 	},
 });
 
-export async function getUser(ctx: QueryCtx, email: string) {
+/**
+ * Gets a user by there clerk user_id
+ * @param ctx The Convex Query Context
+ * @param user_id The clerk user_id
+ * @returns The user or null if not found
+ */
+export async function getUserWithId(ctx: QueryCtx, user_id: string) {
+	return await ctx.db
+		.query('auth')
+		.withIndex('ClerkUserId', (q) => q.eq('user_id', user_id))
+		.unique()
+		.catch((err) => {
+			console.error(err);
+			return null;
+		});
+}
+
+/**
+ * Gets a user by there email
+ * @param ctx The Convex Query Context
+ * @param email The email to search for
+ * @returns
+ */
+export async function getUserWithEmail(ctx: QueryCtx, email: string) {
 	return await ctx.db
 		.query('auth')
 		.filter((q) => q.eq(q.field('email'), email))
-		.unique();
+		.unique()
+		.catch((err) => {
+			console.error(err);
+			return null;
+		});
 }

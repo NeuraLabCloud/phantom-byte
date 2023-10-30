@@ -1,12 +1,17 @@
+// Lib CSS imports must be top before local CSS imports.
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import '@mantine/code-highlight/styles.css';
+
 import './globals.css';
 
 import type { Metadata } from 'next';
+import { ColorSchemeScript } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+
 import ConvexUserProvider from '@/components/providers/ConvexUserProvider';
 import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
 import MantineClientProvider from '@/components/providers/MantineClientProvider';
-import { ColorSchemeScript } from '@mantine/core';
 
 export const metadata: Metadata = {
 	title: 'PhantomByte | Cloud Logging',
@@ -16,14 +21,14 @@ export const metadata: Metadata = {
 		{ name: 'ThatGuyJamal', url: 'https://github.com/ThatGuyJamal' },
 	],
 	keywords: [
-		"PhantomByte",
-		"PhantomByte Cloud",
-		"PhantomByte Cloud Logging",
-		"SAAS",
-		"Cloud Logging",
-		"Cloud Logging Service",
-		"Logging Service",
-		"Logging API",
+		'PhantomByte',
+		'PhantomByte Cloud',
+		'PhantomByte Cloud Logging',
+		'SAAS',
+		'Cloud Logging',
+		'Cloud Logging Service',
+		'Logging Service',
+		'Logging API',
 	],
 	referrer: 'strict-origin-when-cross-origin',
 	creator: 'PhantomByte Team',
@@ -64,7 +69,10 @@ export default function RootLayout({
 			<body>
 				<ConvexClerkProvider>
 					<ConvexUserProvider>
-						<MantineClientProvider>{children}</MantineClientProvider>
+						<MantineClientProvider>
+							<Notifications c={"violet"} />
+							{children}
+						</MantineClientProvider>
 					</ConvexUserProvider>
 				</ConvexClerkProvider>
 			</body>

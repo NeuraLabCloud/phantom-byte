@@ -38,9 +38,11 @@ const tabs = {
 	],
 };
 
-interface NavbarProps {}
+interface NavbarProps {
+	username: string;
+}
 
-const Navbar: FC<NavbarProps> = ({}) => {
+const Navbar: FC<NavbarProps> = ({ username }) => {
 	const [section, setSection] = useState<'general' | 'support'>('general');
 	const [active, setActive] = useState('Dashboard');
 
@@ -100,12 +102,10 @@ const Navbar: FC<NavbarProps> = ({}) => {
 					mb='xs'>
 					<Container>
 						<Center>
-							<Badge color={idle ? 'yellow' : 'violet'}>
+							<Code>{username}</Code>
+							<Badge color={idle ? 'yellow' : 'violet'} className='ml-2'>
 								{idle ? 'Idle' : 'Online'}
 							</Badge>
-						</Center>
-						<Center className='mt-2'>
-							<Code>alpha-unix-build-v0.2.4</Code>
 						</Center>
 					</Container>
 				</Text>
@@ -155,9 +155,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
 			<div className={classes.navbarMain}>{links}</div>
 
 			<Center className='mt-4'>
-				<UserButton
-					afterSignOutUrl='/'
-				/>
+				<UserButton afterSignOutUrl='/' />
 			</Center>
 
 			<div className={classes.footer}>

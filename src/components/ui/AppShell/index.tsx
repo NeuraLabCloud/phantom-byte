@@ -4,12 +4,14 @@ import React, { FC } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger } from "@mantine/core";
 import Navbar from "./nav/Navbar";
+import { AppShellUserData } from "@/types/clerk";
 
 interface indexProps {
   children: React.ReactNode;
+  userData: AppShellUserData
 }
 
-export const AppShellBuilder: FC<indexProps> = async ({ children }) => {
+export const AppShellBuilder: FC<indexProps> = async ({ children, userData }) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -32,7 +34,7 @@ export const AppShellBuilder: FC<indexProps> = async ({ children }) => {
 				</Center> */}
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Navbar />
+        <Navbar username={userData.username}/>
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>

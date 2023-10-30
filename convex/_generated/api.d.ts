@@ -14,7 +14,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as _shared from "../_shared";
 import type * as auth from "../auth";
+import type * as projects from "../projects";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -25,7 +27,9 @@ import type * as auth from "../auth";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  _shared: typeof _shared;
   auth: typeof auth;
+  projects: typeof projects;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
