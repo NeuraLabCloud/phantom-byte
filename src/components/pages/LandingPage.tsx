@@ -10,7 +10,7 @@ import Particles from '@/components/ui/Particles';
 
 interface LandingPageProps {}
 
-const LandingPage: FC<LandingPageProps> = async ({}) => {
+const LandingPage: FC<LandingPageProps> = ({}) => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
 
 	if (isLoading) return <LoadingState />;

@@ -16,12 +16,12 @@ interface CardsProps {
 	title: string;
 	description: string;
 	link: UrlObject;
-	color: DefaultMantineColor;
-	underConstruction: boolean;
 	btnText: string;
+	color?: DefaultMantineColor;
+	underConstruction?: boolean;
 }
 
-const Cards: FC<CardsProps> = async ({
+const Cards: FC<CardsProps> = ({
 	title,
 	description,
 	link,

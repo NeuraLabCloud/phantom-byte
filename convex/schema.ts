@@ -60,7 +60,7 @@ export default defineSchema({
 		 * Projects that the user is a member of.
 		 */
 		joined_projects: v.array(v.id('projects')),
-	}).index('ClerkUserId', ['user_id']),
+	}).index('by_user_id', ['user_id']),
 	/**
 	 * * Projects table
 	 *

@@ -94,7 +94,7 @@ export const get = query({
 export async function getUserWithId(ctx: QueryCtx, user_id: string) {
 	return await ctx.db
 		.query('auth')
-		.withIndex('ClerkUserId', (q) => q.eq('user_id', user_id))
+		.withIndex('by_user_id', (q) => q.eq('user_id', user_id))
 		.unique()
 		.catch((err) => {
 			console.error(err);

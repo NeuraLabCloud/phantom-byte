@@ -103,7 +103,9 @@ const Navbar: FC<NavbarProps> = ({ username }) => {
 					<Container>
 						<Center>
 							<Code>{username}</Code>
-							<Badge color={idle ? 'yellow' : 'violet'} className='ml-2'>
+							<Badge
+								color={idle ? 'yellow' : 'violet'}
+								className='ml-2'>
 								{idle ? 'Idle' : 'Online'}
 							</Badge>
 						</Center>
@@ -113,9 +115,9 @@ const Navbar: FC<NavbarProps> = ({ username }) => {
 				<SegmentedControl
 					transitionDuration={350}
 					value={section}
-					//@ts-expect-error
+					//@ts-ignore
 					onChange={(value: 'account' | 'general') => {
-						//@ts-expect-error
+						//@ts-ignore
 						setSection(value);
 						// router.push(
 						// 	`${pathName}?section=${section}?active=${active.toLocaleLowerCase()}`

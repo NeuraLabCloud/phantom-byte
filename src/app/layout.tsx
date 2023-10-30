@@ -8,6 +8,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { ColorSchemeScript } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import { ModalsProvider } from '@mantine/modals';
 
 import ConvexUserProvider from '@/components/providers/ConvexUserProvider';
 import ConvexClerkProvider from '@/components/providers/ConvexClerkProvider';
@@ -70,8 +71,14 @@ export default function RootLayout({
 				<ConvexClerkProvider>
 					<ConvexUserProvider>
 						<MantineClientProvider>
-							<Notifications c={"violet"} />
-							{children}
+							<ModalsProvider labels={{ confirm: 'Submit', cancel: 'Cancel' }}>
+								<Notifications
+									c={'violet'}
+									position='top-right'
+									limit={3}
+								/>
+								{children}
+							</ModalsProvider>
 						</MantineClientProvider>
 					</ConvexUserProvider>
 				</ConvexClerkProvider>

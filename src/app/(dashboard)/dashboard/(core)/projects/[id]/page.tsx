@@ -59,37 +59,42 @@ interface pageProps {
 const page: FC<pageProps> = async ({ params }) => {
   const rows = projectLogs.map((logItem) => (
     <Table.Tr key={logItem.id}>
-      {columns.map((columnKey: string) => {
+      {columns.map((columnKey: string, index) => {
         //@ts-ignore
-        return <Table.Td>{logItem[columnKey]}</Table.Td>;
+        return <Table.Td key={index}>{logItem[columnKey]}</Table.Td>;
       })}
     </Table.Tr>
   ));
 
   return (
-    <main>
-      <h1 className="pb-5">Project: {params.id}</h1>
-      <Table
-        horizontalSpacing="xl"
-        verticalSpacing="sm"
-        captionSide="bottom"
-        striped
-        highlightOnHover
-        withRowBorders={false}
-      >
-        <Table.Caption>Project's Logs List</Table.Caption>
-        <Table.Thead>
-          <Table.Tr>
-            {columns.map((columnKey) => {
-              return <Table.Th className="capitalize">{columnKey}</Table.Th>;
-            })}
-            <Table.Th></Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
-      </Table>
-    </main>
-  );
+			<main>
+				<h1 className='pb-5'>Project: {params.id}</h1>
+				<Table
+					horizontalSpacing='xl'
+					verticalSpacing='sm'
+					captionSide='bottom'
+					striped
+					highlightOnHover
+					withRowBorders={false}>
+					<Table.Caption>Project&apos;s Logs List</Table.Caption>
+					<Table.Thead>
+						<Table.Tr>
+							{columns.map((columnKey, index) => {
+								return (
+									<Table.Th
+										key={index}
+										className='capitalize'>
+										{columnKey}
+									</Table.Th>
+								);
+							})}
+							<Table.Th></Table.Th>
+						</Table.Tr>
+					</Table.Thead>
+					<Table.Tbody>{rows}</Table.Tbody>
+				</Table>
+			</main>
+		);
 };
 
 export default page;

@@ -55,7 +55,7 @@ const Header: FC<HeaderProps> = ({}) => {
 						<Link
 							// todo - until all pages are setup, its best to avoid this error
 							// type checking for all routes is not needed in staging faze of development
-							//@ts-expect-error
+							//@ts-ignore
 							href={link.link}
 							className={classes.link}
 							onClick={(event) => event.preventDefault()}>
@@ -76,7 +76,7 @@ const Header: FC<HeaderProps> = ({}) => {
 		return (
 			<Link
 				key={link.label}
-				//@ts-expect-error
+				//@ts-ignore
 				href={link.link}
 				className={classes.link}
 				onClick={(event) => event.preventDefault()}>
