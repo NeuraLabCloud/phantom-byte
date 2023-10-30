@@ -1,11 +1,16 @@
-import { Auth } from 'convex/server';
-import { ConvexError } from 'convex/values';
+import { Auth } from "convex/server";
+import { ConvexError } from "convex/values";
 
 export type ErrorData = {
-	code: 'Unauthorized' | 'InvalidOperation' | 'NotFound' | 'DatabaseError' | 'Unknown';
-	message?: string;
-	severity?: 'High' | 'Medium' | 'Low';
-	where?: string;
+  code:
+    | "Unauthorized"
+    | "InvalidOperation"
+    | "NotFound"
+    | "DatabaseError"
+    | "Unknown";
+  message?: string;
+  severity?: "High" | "Medium" | "Low";
+  where?: string;
 };
 
 /**
@@ -13,13 +18,13 @@ export type ErrorData = {
  * see https://docs.convex.dev/functions/error-handling/application-errors
  */
 export class IConvexError extends ConvexError<ErrorData> {
-	constructor(data: ErrorData) {
-		super(data);
-	}
+  constructor(data: ErrorData) {
+    super(data);
+  }
 
-	formatMessage() {
-		return `[${this.data.code.toUpperCase()}]: ${this.data.message}`;
-	}
+  formatMessage() {
+    return `[${this.data.code.toUpperCase()}]: ${this.data.message}`;
+  }
 }
 
 /**
@@ -27,13 +32,14 @@ export class IConvexError extends ConvexError<ErrorData> {
  * @param auth The auth object from the context.
  */
 export async function isAuthenticated(auth: Auth) {
-	const identity = await auth.getUserIdentity();
-	if (!identity) {
-		throw new IConvexError({
-			code: 'Unauthorized',
-			message: 'No identity found',
-		});
-	}
+  const identity = await auth.getUserIdentity();
 
-	return identity;
+  if (!identity) {
+    throw new IConvexError({
+      code: "Unauthorized",
+      message: "No identity found",
+    });
+  }
+
+  return identity;
 }

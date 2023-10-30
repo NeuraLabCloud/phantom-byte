@@ -8,10 +8,13 @@ import { AppShellUserData } from "@/types/clerk";
 
 interface indexProps {
   children: React.ReactNode;
-  userData: AppShellUserData
+  userData: AppShellUserData;
 }
 
-export const AppShellBuilder: FC<indexProps> = async ({ children, userData }) => {
+export const AppShellBuilder: FC<indexProps> = async ({
+  children,
+  userData,
+}) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -34,7 +37,7 @@ export const AppShellBuilder: FC<indexProps> = async ({ children, userData }) =>
 				</Center> */}
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Navbar username={userData.username}/>
+        <Navbar username={userData.username} />
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>

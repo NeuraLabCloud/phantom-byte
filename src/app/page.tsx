@@ -1,5 +1,5 @@
-import LandingPage from '@/components/pages/LandingPage';
+import LandingPage from "@/components/pages/LandingPage";
 
 export default async function Home() {
-	return <LandingPage />;
+  return <LandingPage />;
 }
