@@ -43,3 +43,7 @@ export async function isAuthenticated(auth: Auth) {
 
   return identity;
 }
+
+export const formatReturnString = (caller: string, message: string) => {
+  return `[${caller}]: ${message}`
+}

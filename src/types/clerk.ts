@@ -16,6 +16,6 @@ export type ClerkUserIdentity = {
 /**
  * The user info props passed to the client side through the app shell.
  */
-export type AppShellUserData = {
+export type AppHeaderData = {
   username: string;
 };
