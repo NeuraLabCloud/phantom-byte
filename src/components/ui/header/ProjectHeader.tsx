@@ -15,14 +15,15 @@ import { AppHeaderData } from '@/types/clerk';
 import { useQuery } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { Doc } from '../../../../convex/_generated/dataModel';
+import { redirect } from 'next/navigation';
 
 interface HeaderProps {
-	data: AppHeaderData;
+	data: AppHeaderData | null;
 }
 
 // todo - fetch the project based on the url and not hard coded. This way we can load a project when the user logs on. If no projects, blank page.
 // when a project is found, we load all its services and display them on the center of the page.
-const Header: FC<HeaderProps> = ({ data }) => {
+const ProjectHeader: FC<HeaderProps> = ({ data }) => {
 	const [projectMenuClicked, setProjectMenuClicked] = useState(false);
 	const [selectedProject, setSelectedProject] = useState<Doc<'projects'> | null>(
 		null
@@ -85,15 +86,21 @@ const Header: FC<HeaderProps> = ({ data }) => {
 
 						<Menu.Label>
 							<div className='flex items-center'>
-								<IconPlus
-									color='pink'
-									className='mr-1'
-								/>{' '}
-								<Text
-									size='sm'
-									c='cyan'>
-									Create new project
-								</Text>
+								<Button
+									className='mr-'
+									variant='transparent'
+									href={'/dashboard'}
+									component={Link}>
+									<IconPlus
+										color='pink'
+										className='mr-1'
+									/>{' '}
+									<Text
+										size='sm'
+										c='cyan'>
+										Create new project
+									</Text>
+								</Button>
 							</div>
 						</Menu.Label>
 					</Menu.Dropdown>
@@ -140,4 +147,4 @@ const Header: FC<HeaderProps> = ({ data }) => {
 	);
 };
 
-export default Header;
+export default ProjectHeader;
