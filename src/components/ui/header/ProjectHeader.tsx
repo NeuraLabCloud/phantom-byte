@@ -1,13 +1,14 @@
 'use client';
 
 import React, { FC, useEffect, useState } from 'react';
-import { Menu, Button, Text, rem, Skeleton } from '@mantine/core';
+import { Menu, Button, Text, rem, Skeleton, Center } from '@mantine/core';
 import {
 	IconArrowDown,
 	IconBook2,
 	IconBrandDiscord,
 	IconBrandGithub,
 	IconPlus,
+	IconProgress,
 	IconSettings,
 } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -15,7 +16,6 @@ import { AppHeaderData } from '@/types/clerk';
 import { useQuery } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { Doc } from '../../../../convex/_generated/dataModel';
-import { redirect } from 'next/navigation';
 
 interface HeaderProps {
 	data: AppHeaderData | null;
@@ -43,6 +43,14 @@ const ProjectHeader: FC<HeaderProps> = ({ data }) => {
 		return <Skeleton height={50} />;
 	}
 
+	const handleProjectSelection = (projectId: string) => {
+		const selected = projects.find((project) => project._id === projectId);
+		if (selected) {
+			setSelectedProject(selected);
+			setProjectMenuClicked(false); // Close the project dropdown after selection
+		}
+	};
+
 	return (
 		<div className='flex items-center justify-between p-4 shadow-md bg-gray-600/20'>
 			{/* Logo */}
@@ -68,16 +76,24 @@ const ProjectHeader: FC<HeaderProps> = ({ data }) => {
 						</Button>
 					</Menu.Target>
 					<Menu.Dropdown>
-						<Menu.Label>Project Selection</Menu.Label>
+						<Menu.Label>
+							<Center>Project Selection</Center>
+						</Menu.Label>
 
 						{projects.map((project, index) => {
 							return (
 								<Menu.Item
 									key={index}
 									leftSection={
-										<IconSettings style={{ width: rem(14), height: rem(14) }} />
+										<IconProgress style={{ width: rem(14), height: rem(14) }} />
 									}>
-									{project.name}
+									<Button
+										onClick={() => handleProjectSelection(project._id)}
+										variant='transparent'
+										href={`/dashboard/p/${project._id}`}
+										component={Link}>
+										{project.name}
+									</Button>
 								</Menu.Item>
 							);
 						})}
@@ -89,7 +105,7 @@ const ProjectHeader: FC<HeaderProps> = ({ data }) => {
 								<Button
 									className='mr-'
 									variant='transparent'
-									href={'/dashboard'}
+									href={'/dashboard/p/create'}
 									component={Link}>
 									<IconPlus
 										color='pink'
@@ -113,7 +129,7 @@ const ProjectHeader: FC<HeaderProps> = ({ data }) => {
 
 				{/* Project Settings */}
 				<div className='ml-4'>
-					<Button variant='subtle'>
+					<Button variant='subtle' component={Link} href={`/dashboard/p/${selectedProject._id}/settings`}>
 						Project Settings <IconSettings className='ml-2' />{' '}
 					</Button>
 				</div>

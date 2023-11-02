@@ -13,4 +13,5 @@
 - [ ] Admin panel for client management ( Admin Role+ Users)
 - [ ] SMS reports for clients for fatal errors (Configurable)
 - [ ] When users want to delete there accounts, we will simply tombstone their account and this will delete all their projects, however there client account will still be there.
+- [ ] move [convex](../convex/) folder into [this repo](https://github.com/PhantomByteCloud/database)
 <!-- - [ ] -->
