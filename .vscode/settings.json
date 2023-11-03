@@ -115,7 +115,26 @@
 		"zIndex"
 	],
 	"cSpell.words": [
+		"autosize",
+		"clsx",
+		"cmdk",
+		"commitlint",
+		"contentlayer",
+		"googleusercontent",
+		"hookform",
+		"ianvs",
+		"lucide",
+		"mdast",
+		"mickasmt",
+		"NEXTAUTH",
+		"nextjs",
+		"rehype",
+		"shiki",
+		"Signin",
 		"skeletonlabs",
-		"tailwindcss"
+		"tailwindcss",
+		"tombstoned",
+		"vaul",
+		"zustand"
 	]
 }
